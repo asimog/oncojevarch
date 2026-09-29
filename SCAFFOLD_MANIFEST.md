@@ -23,7 +23,7 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - optional thin Agents SDK experimental Codex-tool adapter;
 - uncertainty-aware frontier contract;
 - complete frozen A001-A020 architecture experiment protocols;
-- executable A001-A013 architecture experiments;
+- executable A001-A015 architecture experiments;
 - real-data A/B/C evaluation design in docs;
 - architecture checks and tests.
 

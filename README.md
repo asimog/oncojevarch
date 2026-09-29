@@ -230,6 +230,26 @@ reads the recorded `jev-1.13.0` baseline back from the append-only store, re-run
 control, and scores `jev-preview` against frozen claim-rate, agreement, drift, and calibration
 tolerances. The candidate was approved for that contract only.
 
+### A014 — offline feature discovery and locked cases
+
+\\powershell
+python -m oncodex run A014
+python -m oncodex run A014 --live
+\
+A014 runs deterministic lexical feature discovery on a development split, gate it through one
+batched Jev endorsement call, and score the survivors on a frozen locked test against a baseline
+feature set. The frozen result was negative: discovery selected positional corpus artifacts, Jev
+endorsed none of them, and nothing was promoted.
+
+### A015 — gap routing and promotion guarding
+
+\\powershell
+python -m oncodex run A015
+\
+A015 replays ten representative and four adversarial gap scenarios through a one-keyword baseline
+and combined-signal routing with kind-owned guards, driving the real capability registry for each
+promotion attempt. Combined-signal routing matched every scenario with zero unsafe activations.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -238,7 +258,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A013 currently have runners. A014-A020 are deliberately plan-ready rather than
+Only A001-A015 currently have runners. A016-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -267,7 +287,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A013 implementations
+experiments/architecture/     A001–A015 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants
