@@ -21,6 +21,7 @@ class FrontierEntry:
     relative_rank: float | None = None
     absolute_viability: float | None = None
     uncertainty: float | None = None
+    novelty: float | None = None
     next_information_need: str | None = None
 
 

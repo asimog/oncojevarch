@@ -174,6 +174,16 @@ A008 replays six locked probability trees through beam widths 1, 2, and 3. It us
 length-normalized geometric-mean path score, records every evaluated edge, and keeps synthetic
 search-mechanics evidence separate from biological validation.
 
+### A009 — top score versus exploration allocation
+
+```powershell
+python -m oncodex run A009
+```
+
+A009 compares four top-promise slots with an equal-budget allocation of two promise, one
+uncertainty, and one novelty slot. Outcome labels are locked for evaluation and unavailable to
+the allocator.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -182,7 +192,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A008 currently have runners. A009-A020 are deliberately plan-ready rather than
+Only A001-A009 currently have runners. A010-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -211,7 +221,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A008 implementations
+experiments/architecture/     A001–A009 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

@@ -179,6 +179,16 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("recall", "diversity", "false-negative burden", "cost"),
         ("exploration adds cost without useful-candidate recovery",),
         ("set or reject an exploration allocation",),
+        executable=True,
+        success=(
+            "exploration improves useful recall by at least 0.25 at the same candidate budget",
+            "the two highest-promise candidates remain selected",
+            "two deterministic replays produce identical selections and metrics",
+            (
+                "recall, precision, false negatives, reason diversity, cost, "
+                "and wall time are recorded"
+            ),
+        ),
     ),
     _a(
         10,

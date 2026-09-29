@@ -23,7 +23,7 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - optional thin Agents SDK experimental Codex-tool adapter;
 - uncertainty-aware frontier contract;
 - complete frozen A001-A020 architecture experiment protocols;
-- executable A001-A008 architecture experiments;
+- executable A001-A009 architecture experiments;
 - real-data A/B/C evaluation design in docs;
 - architecture checks and tests.
 
@@ -67,9 +67,11 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
   from 1.00 to 0.00 while preserving viable recall at 1.00 across three stable repetitions.
 - `python -m oncodex run A008` — beam width 2 improved frozen terminal recall from 0.333 to
   0.833 at 1.48 times the evaluated edges; width 3 reached 1.00 recall.
+- `python -m oncodex run A009` — a frozen 2/1/1 promise/uncertainty/novelty allocation
+  improved useful recall from 0.50 to 1.00 at the same four-candidate budget.
 
 ## First recommended next action
 
-Proceed to A009 with a locked candidate pool containing high-promise, uncertain, and novel
-useful outcomes. Compare top-score-only selection with a prespecified exploration allocation and
-make the false-negative/resource tradeoff explicit.
+Proceed to A010 with an immutable accept/reject log and an outcome-resolved rejection sample.
+Measure where useful candidates were lost without letting the audit classifier rewrite historical
+decisions or scientific evidence.
