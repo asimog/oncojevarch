@@ -27,4 +27,5 @@ def test_every_architecture_experiment_has_a_complete_frozen_protocol() -> None:
         "A007",
         "A008",
         "A009",
+        "A010",
     ]

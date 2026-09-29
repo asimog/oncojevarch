@@ -184,6 +184,16 @@ A009 compares four top-promise slots with an equal-budget allocation of two prom
 uncertainty, and one novelty slot. Outcome labels are locked for evaluation and unavailable to
 the allocator.
 
+### A010 — rejected-candidate audit
+
+```powershell
+python -m oncodex run A010
+```
+
+A010 freezes historical decisions before joining later outcomes, then takes an outcome-blind,
+stage-balanced rejection sample. Audit findings append a new evaluation view and never rewrite
+the decision log.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -192,7 +202,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A009 currently have runners. A010-A020 are deliberately plan-ready rather than
+Only A001-A010 currently have runners. A011-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -221,7 +231,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A009 implementations
+experiments/architecture/     A001–A010 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

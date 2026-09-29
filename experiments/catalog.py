@@ -200,6 +200,16 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("miss rate", "miss reason", "stage", "recoverability"),
         ("audit sampling is biased or outcomes cannot be resolved",),
         ("revise the responsible upstream stage or document residual risk",),
+        executable=True,
+        success=(
+            "the outcome-blind sample represents all rejection stages with zero proportion delta",
+            "all sampled and accepted candidates have resolved later outcomes",
+            (
+                "at least two useful misses are found and at least half receive "
+                "actionable recovery classes"
+            ),
+            "two deterministic audits reproduce sample identities, findings, and metrics",
+        ),
     ),
     _a(
         11,
