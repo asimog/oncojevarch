@@ -266,6 +266,13 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("agreement", "calibration", "per-stratum errors", "cost", "latency"),
         ("any frozen critical tolerance is exceeded",),
         ("approve, scope, or reject the model upgrade",),
+        executable=True,
+        success=(
+            "the rebuilt evaluation set matches the recorded projection fingerprint",
+            "the candidate keeps every frozen claim-rate, agreement, drift, and calibration bound",
+            "a same-model control separates provider noise from model drift",
+            "raw per-question probabilities, tokens, and latency are recorded for every model",
+        ),
     ),
     _a(
         14,

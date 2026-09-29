@@ -218,6 +218,18 @@ every case with a Noul-triaged cascade. The frozen result was negative: bounded 
 every live case, so it saved no OncoX calls; the cascade is not supported for this contract and the
 rubric mechanics, adapter, and false-negative accounting are retained.
 
+### A013 — Jev model-version regression
+
+```powershell
+python -m oncodex run A013
+python -m oncodex run A013 --live
+```
+
+A013 rebuilds the A011 coherence capability, refuses to run if its projection fingerprint changed,
+reads the recorded `jev-1.13.0` baseline back from the append-only store, re-runs that model as a
+control, and scores `jev-preview` against frozen claim-rate, agreement, drift, and calibration
+tolerances. The candidate was approved for that contract only.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -226,7 +238,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A012 currently have runners. A013-A020 are deliberately plan-ready rather than
+Only A001-A013 currently have runners. A014-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -255,7 +267,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A012 implementations
+experiments/architecture/     A001–A013 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

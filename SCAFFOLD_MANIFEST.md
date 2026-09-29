@@ -23,7 +23,7 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - optional thin Agents SDK experimental Codex-tool adapter;
 - uncertainty-aware frontier contract;
 - complete frozen A001-A020 architecture experiment protocols;
-- executable A001-A012 architecture experiments;
+- executable A001-A013 architecture experiments;
 - real-data A/B/C evaluation design in docs;
 - architecture checks and tests.
 
@@ -78,6 +78,10 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
   against a 0.30 target, with zero false negatives. The OncoX adapter, rubric mechanics, and
   false-negative accounting are retained; a revised triage contract needs a new experiment
   identity.
+- `python -m oncodex run A013 --live` — the frozen A011 projection fingerprint matched the
+  recorded value; `jev-preview` scored 1.00 decision agreement, 0.0070 drift against a 0.0095
+  same-model control, and 0.00391 Brier against a 0.00433 baseline, so the candidate was approved
+  for that one contract only.
 
 ## First recommended next action
 

@@ -75,6 +75,15 @@ Version observed at scaffold creation:
 
 - `typesafe-sdk` 0.7.2 (PyPI release 2026-09-26)
 
+Models offered by the account on 2026-09-30 (read through `TypeSafeClient.models.list()`):
+
+- `jev-1.13.0` — the pinned model used by A002-A012;
+- `jev-latest` (released 2026-09-10);
+- `jev-preview` (released 2026-09-10).
+
+A model upgrade is a governed change: A013 re-evaluates a candidate against recorded baseline
+responses and frozen tolerances before any contract adopts it.
+
 ## GDC/NCI reference sources
 
 Reference only, not architecture dependencies:
