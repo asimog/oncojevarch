@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from evaluation.models import EvaluationLevel
 from oncolab.experiments import ExperimentClass, ExperimentSpec
 
 
@@ -14,7 +15,7 @@ def _a(
     failure: tuple[str, ...],
     consequences: tuple[str, ...],
     *,
-    level: str = "synthetic",
+    level: EvaluationLevel = EvaluationLevel.SYNTHETIC,
     executable: bool = False,
     success: tuple[str, ...] | None = None,
 ) -> ExperimentSpec:
@@ -221,7 +222,7 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("candidate count", "confidence", "claim rate", "false narrative rate"),
         ("null outputs remain materially persuasive or unstable across seeds",),
         ("tighten evidence gates or reject the affected workflow",),
-        level="semi_synthetic",
+        level=EvaluationLevel.SEMI_SYNTHETIC,
         executable=True,
         success=(
             "valid claim rate is at least 0.80 in every repetition",
@@ -243,7 +244,7 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("quality", "OncoX calls", "tokens", "cost", "false-negative burden"),
         ("quality loss exceeds margin or savings miss target",),
         ("adopt scoped triage or retain all-case reasoning",),
-        level="semi_synthetic",
+        level=EvaluationLevel.SEMI_SYNTHETIC,
         executable=True,
         success=(
             "every locked case is evaluated in both arms with identical case identity",
@@ -374,7 +375,7 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("rediscovery rank", "recall@k", "leakage indicators", "cost", "stability"),
         ("mask is reversible, null control succeeds, or target misses threshold",),
         ("advance to independent validation or revise/reject the architecture",),
-        level="retrospective_real",
+        level=EvaluationLevel.RETROSPECTIVE_REAL,
         executable=True,
         success=(
             "identifiers, names, sites, and disease types are absent from every arm input",
@@ -402,7 +403,7 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ),
         ("C does not move the Pareto frontier or reduces discovery recall",),
         ("retain, narrow, redesign, or reject the central OncoJev hypothesis",),
-        level="retrospective_real",
+        level=EvaluationLevel.RETROSPECTIVE_REAL,
         executable=True,
         success=(
             "every frontier point is extracted from an immutable recorded experiment result",

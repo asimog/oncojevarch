@@ -17,6 +17,7 @@ OncoJev is an experiment-driven autonomous computational cancer-discovery system
 7. `docs/LEARNING_CURRICULUM.md` — concepts to learn before expanding the system.
 8. `docs/EXPERIMENT_CATALOG.md` — architecture/scientific experiments.
 9. `docs/SOURCES.md` — current primary sources and version notes.
+10. `docs/tasks/README.md` — reviewed task program for the current phase (working state).
 
 ## Stable rules
 
@@ -62,11 +63,9 @@ There are only two experiment classes:
 Architecture experiments do not create cancer ScientificEvidence.
 Scientific experiments do not silently redesign OnCodex.
 
-Initial executable architecture experiments:
+Executable architecture experiments:
 
-- A001 — OnCodex / Codex workspace smoke.
-- A002 — Jev primitive semantics.
-- A003 — semantic projection sufficiency.
+- A001-A020 — all executable; recorded outcomes live in `docs/EXPERIMENT_CATALOG.md`.
 
 ## Verification
 

@@ -59,12 +59,15 @@ expected improvement in the next scientific decision - cost of acquiring informa
 
 The initial system does not need a formal VOI optimizer; it does need to record why richer information was requested.
 
-## 4. Four search problems
+## 4. Five search problems
 
-1. **Information search** — what evidence or representation should be acquired next?
-2. **Candidate search** — which biological states deserve deeper investigation?
-3. **Explanation search** — what hypothesis best accounts for evidence and what would distinguish alternatives?
-4. **Representation search** — what is the cheapest scientifically sufficient representation for the next decision?
+1. **Information search** — what evidence or information should be acquired next?
+2. **Representation search** — what is the cheapest scientifically sufficient representation for the next decision?
+3. **Capability search** — what validated capability can obtain, measure, transform, or judge the required information?
+4. **Candidate search** — which scientific states deserve deeper investigation?
+5. **Explanation search** — what explanation accounts for the evidence, and what observation would distinguish alternatives?
+
+Capability search is distinct from candidate search: one finds the instrument, the other finds the objects worth investigating. When capability search fails, an explicit gap triggers capability evolution.
 
 ## 5. Discovery must preserve uncertainty
 
@@ -111,6 +114,14 @@ HarnessGap    -> runtime/harness engineering
 
 Generated code or prompts never self-promote.
 
+### Capability search
+
+The question that precedes capability evolution: what validated scientific or operational capability can produce the information required by the next decision?
+
+OnCodex discovers capabilities from scientific needs, not from a fixed catalogue of modalities. Biological modalities are examples of scientific information, not permanent orchestration lanes.
+
+The architecture must be able to absorb scientific measurements that were not anticipated when the repository was created. Capability evolution is infrastructure around the three-tier model, not Tier 4.
+
 ## 8. Evaluation ladder
 
 ```text
@@ -123,4 +134,31 @@ synthetic mechanics
 
 Only real-data levels meaningfully test scientific discovery.
 
+Executed coverage currently reaches retrospective real data (A019-A020); independent and temporal levels have no frozen protocols yet. `EVALUATION.md` owns coverage, level gates, and compatibility.
+
 The full system comparison is A/B/C, but component ablations should precede it.
+
+## 9. Earned lessons (A001-A020)
+
+Durable architecture lessons from recorded results; none is a biological claim.
+
+1. question-specific deterministic projections beat giant context (A003-A004);
+2. irrelevant state can impose cost or degrade semantic performance (A004);
+3. use the cheapest scientifically sufficient representation (A005);
+4. deterministic high-recall retrieval precedes semantic reranking (A006);
+5. Jev cannot rescue candidates eliminated upstream (A006);
+6. relative selection does not imply absolute adequacy (A007);
+7. uncertainty-preserving search can beat irreversible greedy pruning (A008);
+8. exploration has legitimate scientific value (A009);
+9. rejected-candidate audits reveal search false negatives (A010);
+10. null controls are necessary for semantic components (A011);
+11. model upgrades require contract-specific regression evaluation (A013);
+12. semantic feature discovery can overfit (A014, negative);
+13. gap routing and no-self-promotion are testable governance (A015);
+14. bounded context must earn its value (A016, negative);
+15. durable idempotent operations matter for autonomy (A017);
+16. architecture changes should be bounded and evidence-traceable (A018);
+17. cheap representations can be scientifically insufficient (A019, negative);
+18. the tested Jev-to-OncoX cascade did not establish savings (A012, negative);
+19. A020 did not demonstrate a combined-arm frontier shift on recorded tasks;
+20. negative results narrow architecture rather than cause arbitrary redesign.

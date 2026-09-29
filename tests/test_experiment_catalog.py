@@ -1,3 +1,4 @@
+from evaluation.models import EvaluationLevel
 from experiments.catalog import EXPERIMENTS
 from oncolab.experiments import ExperimentClass
 
@@ -39,3 +40,19 @@ def test_every_architecture_experiment_has_a_complete_frozen_protocol() -> None:
         "A019",
         "A020",
     ]
+
+
+def test_every_experiment_declares_a_typed_evaluation_level() -> None:
+    levels = {e.experiment_id: e.evaluation_level for e in EXPERIMENTS}
+
+    assert all(isinstance(level, EvaluationLevel) for level in levels.values())
+    assert levels["A011"] is EvaluationLevel.SEMI_SYNTHETIC
+    assert levels["A019"] is EvaluationLevel.RETROSPECTIVE_REAL
+
+
+def test_real_data_levels_declare_required_contracts() -> None:
+    for experiment in EXPERIMENTS:
+        if experiment.evaluation_level is EvaluationLevel.INDEPENDENT_REAL:
+            assert "compatibility_contract" in experiment.inputs, experiment.experiment_id
+        if experiment.evaluation_level is EvaluationLevel.TEMPORAL_PROSPECTIVE:
+            assert {"t1_cutoff", "t2_cutoff"} <= set(experiment.inputs), experiment.experiment_id

@@ -6,6 +6,8 @@ from enum import StrEnum
 from hashlib import sha256
 from typing import Any
 
+from evaluation.models import EvaluationLevel
+
 
 class ExperimentClass(StrEnum):
     ARCHITECTURE = "architecture"
@@ -36,7 +38,7 @@ class ExperimentSpec:
     decision_consequences: tuple[str, ...] = ()
     budget: dict[str, Any] = field(default_factory=dict)
     capability_versions: dict[str, str] = field(default_factory=dict)
-    evaluation_level: str = "synthetic"
+    evaluation_level: EvaluationLevel = EvaluationLevel.SYNTHETIC
     executable: bool = False
 
     def fingerprint(self) -> str:

@@ -12,19 +12,33 @@ A mature autonomous laboratory cannot know every future method, source, semantic
 
 ### MethodGap
 
-The lab does not know a scientifically defensible method. Route to methodological/scientific research. A coding agent may not invent a method and label the problem solved.
+The lab does not know a scientifically defensible method.
+
+Route: methodological/scientific research -> candidate method -> method evaluation -> scientifically defensible method; if code is absent, the request becomes a `CapabilityGap`.
+
+A MethodGap is never routed directly to Codex implementation, and a coding agent may not invent a method and label the problem solved.
 
 ### CapabilityGap
 
-A defensible method is known, but the executable implementation is absent. Route to engineering.
+A defensible method is known, but the executable implementation is absent.
+
+Route: bounded engineering specification -> Codex/engineering capability -> implementation -> focused tests -> architecture checks -> verification -> scientific evaluation where scientifically consequential -> versioned capability.
 
 ### DecisionGap
 
-A bounded semantic distinction is useful, but no evaluated Jev capability exists. Route to projection design, semantic-contract design, Jev evaluation, calibration/stability work, and controlled promotion.
+A bounded semantic distinction is useful, but no evaluated Jev capability exists.
+
+Route: bounded semantic question -> deterministic projection -> candidate Jev capability -> development evaluation -> validation -> locked evaluation -> bounded activation.
+
+Questions emerge from a real decision gap; there are no permanent global Jev batteries, and model confidence is not permission.
 
 ### HarnessGap
 
-The runtime lacks an operational ability required to run safely/reliably. Route to harness engineering.
+The runtime lacks an operational ability required to run safely/reliably.
+
+Route: bounded harness engineering -> verification -> versioned engineering capability.
+
+Harness work improves runtime reliability; it must not silently mutate scientific methods or evidence rules.
 
 ## Promotion
 
@@ -44,6 +58,54 @@ gap
 ```
 
 Do not fabricate a synthetic version identifier when Git can provide the actual source identity.
+
+## Lifecycle
+
+```mermaid
+flowchart TD
+    NEED["Need"]
+    SEARCH["Capability search"]
+    EXISTS{"Applicable validated capability?"}
+    USE["Use capability"]
+    GAP["Explicit gap"]
+    CLASS{"Classify"}
+    M["MethodGap"]
+    C["CapabilityGap"]
+    D["DecisionGap"]
+    H["HarnessGap"]
+    MR["Method research"]
+    ENG["Engineering"]
+    JD["Jev design + evaluation"]
+    HE["Harness engineering"]
+    CAND["Candidate capability"]
+    EV1["Engineering verification"]
+    EV2["Scientific / contract evaluation"]
+    REG["Versioned registration"]
+    ACTIVE["Bounded activation"]
+
+    NEED --> SEARCH
+    SEARCH --> EXISTS
+    EXISTS -->|"yes"| USE
+    EXISTS -->|"no"| GAP
+    GAP --> CLASS
+    CLASS --> M
+    CLASS --> C
+    CLASS --> D
+    CLASS --> H
+    M --> MR --> CAND
+    C --> ENG --> CAND
+    D --> JD --> CAND
+    H --> HE --> CAND
+    CAND --> EV1 --> EV2 --> REG --> ACTIVE --> USE
+```
+
+Preserve unconditionally:
+
+```text
+generated != verified
+engineering verified != scientifically validated
+scientifically validated != universally applicable
+```
 
 ## Two readiness axes
 

@@ -44,7 +44,8 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 
 - `python scripts/check_architecture.py` — passed.
 - `python -m compileall ...` — passed.
-- `python -m pytest` — 16 passed.
+- `python -m pytest` — 16 passed at scaffold creation; current suite (2026-09-30): 110 passed,
+  3 skipped.
 - `python -m ruff check .` — passed.
 - `python -m mypy .` — passed.
 - `python -m oncodex status` — passed.
@@ -106,7 +107,9 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
   either recorded task (A012: B 13,656 tokens at quality 1.000 dominates C 15,014 tokens; A019:
   deterministic 0 tokens at 0.545 dominates both model arms).
 
-## First recommended next action
+## Status note (2026-09-30)
 
-Continue with the frozen A017-A020 protocols one checkpoint at a time, keeping every live slice as
-small as the question allows, and record negative results as first-class outcomes.
+This manifest is the scaffold-creation record. Current status lives in `README.md` ("Current
+phase"), `docs/EVALUATION.md`, and `docs/EXPERIMENT_CATALOG.md`. The A017-A020 protocols were
+executed; A019 and A020 recorded negative/narrowing results, and the active work program is
+tracked in `docs/tasks/` and `docs/exec-plans/active/`.

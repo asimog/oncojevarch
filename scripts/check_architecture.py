@@ -24,7 +24,10 @@ FORBIDDEN: dict[str, set[str]] = {
     "execution": {"oncodex", "oncox", "discovery", "observatory", "jev"},
     "store": {"oncodex", "oncox", "discovery", "execution", "jev", "evidence", "research"},
     "oncox": {"oncodex"},
+    "oncolab": {"oncodex", "oncox", "discovery", "observatory"},
 }
+SOURCE_ADAPTERS = {"execution.gdc"}
+SOURCE_ADAPTER_OWNERS = {"execution", "experiments"}
 REQUIRED_DOCS = {
     "AGENTS.md",
     "THESIS.md",
@@ -39,15 +42,40 @@ REQUIRED_DOCS = {
 }
 
 
-def imported_roots(path: Path) -> set[str]:
+def imported_modules(path: Path) -> set[str]:
     tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-    roots: set[str] = set()
+    modules: set[str] = set()
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
-            roots.update(alias.name.split(".")[0] for alias in node.names)
+            modules.update(alias.name for alias in node.names)
         elif isinstance(node, ast.ImportFrom) and node.module:
-            roots.add(node.module.split(".")[0])
-    return roots & PROJECT_PACKAGES
+            modules.add(node.module)
+    return modules
+
+
+def imported_roots(path: Path) -> set[str]:
+    return {module.split(".")[0] for module in imported_modules(path)} & PROJECT_PACKAGES
+
+
+def forbid_import_directions(root: Path) -> list[str]:
+    errors: list[str] = []
+    for package, forbidden in FORBIDDEN.items():
+        for path in (root / package).rglob("*.py"):
+            bad = imported_roots(path) & forbidden
+            if bad:
+                errors.append(
+                    f"{path.relative_to(root)} imports forbidden package(s): {sorted(bad)}"
+                )
+
+    for package in sorted(PROJECT_PACKAGES - SOURCE_ADAPTER_OWNERS):
+        for path in (root / package).rglob("*.py"):
+            leaked = imported_modules(path) & SOURCE_ADAPTERS
+            if leaked:
+                errors.append(
+                    f"{path.relative_to(root)} imports source adapter(s) {sorted(leaked)}; "
+                    "source-specific code is confined to execution/ and experiments/"
+                )
+    return errors
 
 
 def main() -> int:
@@ -73,13 +101,7 @@ def main() -> int:
         if required not in gitignore:
             errors.append(f".gitignore must contain {required}")
 
-    for package, forbidden in FORBIDDEN.items():
-        for path in (ROOT / package).rglob("*.py"):
-            bad = imported_roots(path) & forbidden
-            if bad:
-                errors.append(
-                    f"{path.relative_to(ROOT)} imports forbidden package(s): {sorted(bad)}"
-                )
+    errors.extend(forbid_import_directions(ROOT))
 
     if errors:
         print("ARCHITECTURE CHECK FAILED")

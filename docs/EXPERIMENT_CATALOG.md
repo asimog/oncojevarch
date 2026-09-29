@@ -24,13 +24,17 @@ There are only two experiment classes: architecture and scientific.
 | A016 | Full history vs bounded/progressive OnCodex context | executable; bounded context not adopted |
 | A017 | Crash/recovery/idempotency | executable; idempotent resume supported |
 | A018 | Can architecture results justify small reviewable repo changes? | executable; bounded proposal accepted for review |
-| A019 | Leakage-resistant masked real-data rediscovery | frozen real-data protocol |
-| A020 | Full system A/B/C science-efficiency frontier | frozen real-data protocol |
+| A019 | Leakage-resistant masked real-data rediscovery | executed; frozen negative result (recall@1 0.273 vs 0.50 target; no leakage) |
+| A020 | Full system A/B/C science-efficiency frontier | executed; arm C moved no recorded frontier; central hypothesis narrowed |
 
 The executable source of truth is `experiments/catalog.py`. Each protocol specifies a
 hypothesis, required data and capabilities, comparison arms, metrics, failure criteria,
 architecture consequences, resource ceiling, and evaluation level. Use
 `python -m oncodex plan A###` to inspect the exact frozen input before implementation or run.
+
+Evaluation coverage currently ends at `retrospective_real`; `independent_real` and
+`temporal_prospective` have no frozen protocols yet. `docs/EVALUATION.md` owns coverage, level
+gates, compatibility, controls, and resource-accounting rules.
 
 ## Scientific experiments
 

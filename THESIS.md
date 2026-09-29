@@ -25,6 +25,17 @@ The architecture must allow evidence that:
 - semantic filtering reduces recall of novel useful candidates;
 - a projection removes scientifically material information.
 
+## Recorded evidence to date
+
+A001-A020 tested architecture hypotheses; none is proof of this thesis.
+
+- A006 and A007 are the strongest recorded narrow positive results: bounded Jev reranking raised deterministic top-1 selection, and an absolute-viability Noul reduced false acceptance.
+- A002-A005, A008-A011, A013, A015, A017, and A018 established mechanics, contracts, controls, and governance rather than scientific value.
+- A012, A014, A016, A019, and A020 returned negative or narrowing results: the tested Jev-to-OncoX cascade saved no calls, semantic feature discovery overfit, bounded context did not earn its value, a masked real-data rediscovery missed its frozen target without leakage, and the combined arm moved no recorded quality-resource frontier.
+
+These outcomes narrow the hypothesis; they do not remove it. Any revised contract is re-tested as
+a new experiment identity, never by editing a recorded result.
+
 The mature comparison is:
 
 ```text
@@ -34,3 +45,10 @@ C = deterministic + Jev + OncoX
 ```
 
 The main question is whether C shifts the science-efficiency frontier, not whether C can be made to look best on one metric.
+
+## Harness strategy is not a fourth arm
+
+Capability search and capability evolution are harness mechanisms around the three tiers. They
+keep future scientific tools from being predetermined. They are not part of the A/B/C comparison:
+a mature comparison holds the validated capability set constant and varies only the decision
+architecture of the arms.

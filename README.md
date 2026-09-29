@@ -1,10 +1,43 @@
-# OncoJev scaffold
+# OncoJev
 
-An experiment-first scaffold for an autonomous computational cancer-discovery laboratory.
+OncoJev is an experiment-driven autonomous computational cancer-discovery system.
 
-**Status:** architecture-experiment harness. This is deliberately not a complete autonomous lab and makes no scientific discovery claims.
+**Status:** architecture-experiment harness with A001-A020 executed. This is deliberately not a complete autonomous lab and makes no scientific discovery claims.
 
-The project begins with a falsifiable question: can deterministic scientific computation + high-throughput typed semantic judgment + selective deep scientific reasoning improve scientifically useful discovery per unit compute? See `THESIS.md`.
+## Scientific thesis
+
+Can deterministic scientific computation + high-throughput typed semantic judgment (Jev) + selective deep scientific reasoning (OncoX) improve scientifically useful discovery per unit compute, data transfer, wall-clock time, and expensive reasoning?
+
+```text
+A = deterministic scientific system
+B = deterministic + selective OncoX
+C = deterministic + bounded evaluated Jev + selective OncoX
+```
+
+The main question is whether C shifts the science-efficiency frontier. This is a falsifiable hypothesis, not a premise the architecture may guarantee. See `THESIS.md`.
+
+## Harness strategy
+
+```text
+scientific uncertainty
+  -> what information would reduce it?
+  -> what representation is sufficient?
+  -> what capability can produce or evaluate it?
+  -> capability search
+  -> applicable validated capability?
+       yes -> execute -> new ScientificEvidence
+       no  -> explicit gap -> classify -> evaluated capability evolution -> versioned capability
+```
+
+Capability evolution is infrastructure around the three scientific tiers, never a fourth tier. The architecture should not need modification merely because a new scientific measurement type becomes useful. See `ARCHITECTURE.md` and `docs/CAPABILITY_EVOLUTION.md`.
+
+## Current phase
+
+A001-A020 tested architecture hypotheses and are recorded in `docs/EXPERIMENT_CATALOG.md`; several narrowed or rejected their candidate capabilities (A012, A014, A016, A019, A020). The next phase is not "build a fixed cancer pipeline." It is:
+
+> Use the autonomous harness on scientifically meaningful investigations in which OnCodex determines what information is required, searches for applicable capabilities, exposes gaps where capabilities are absent, evolves only justified capabilities, and uses the three-tier intelligence system where appropriate.
+
+The scientific question determines the source, measurements, methods, capabilities, semantic questions, and follow-up reasoning. The architecture does not. The reviewed task program for this phase is tracked in `docs/tasks/`.
 
 ## Mental model
 
@@ -21,9 +54,10 @@ Store     = durable scientific memory
 Observatory = read-only view
 ```
 
-The scaffold intentionally implements only the boundaries, durable experiment records,
-capability/gap lifecycle, semantic projection contract, minimal search frontier, append-only
-store, and the architecture capabilities earned by A001-A006.
+The scaffold implements the boundaries, durable experiment records, capability/gap lifecycle,
+semantic projection contract, minimal search frontier, append-only store, and the architecture
+mechanisms exercised by A001-A020. Several candidate capabilities were rejected or narrowed by
+those experiments; see `docs/EXPERIMENT_CATALOG.md` for recorded outcomes.
 
 ## Why it is small
 
@@ -232,10 +266,11 @@ tolerances. The candidate was approved for that contract only.
 
 ### A014 — offline feature discovery and locked cases
 
-\\powershell
+```powershell
 python -m oncodex run A014
 python -m oncodex run A014 --live
-\
+```
+
 A014 runs deterministic lexical feature discovery on a development split, gate it through one
 batched Jev endorsement call, and score the survivors on a frozen locked test against a baseline
 feature set. The frozen result was negative: discovery selected positional corpus artifacts, Jev
@@ -243,9 +278,10 @@ endorsed none of them, and nothing was promoted.
 
 ### A015 — gap routing and promotion guarding
 
-\\powershell
+```powershell
 python -m oncodex run A015
-\
+```
+
 A015 replays ten representative and four adversarial gap scenarios through a one-keyword baseline
 and combined-signal routing with kind-owned guards, driving the real capability registry for each
 promotion attempt. Combined-signal routing matched every scenario with zero unsafe activations.
@@ -274,9 +310,9 @@ same final digest with six artifacts and zero duplicate writes.
 
 ### A018 — bounded reviewable change proposals
 
-`powershell
+```powershell
 python -m oncodex run A018
-`
+```
 
 A018 compiles two change requests from the recorded A012 finding: a bounded, fully traced proposal
 and an unbounded rewrite. It applies the bounded patch only in a scratch copy, runs compilation,
@@ -284,10 +320,10 @@ focused tests, and architecture checks there, and records the proposal for human
 
 ### A019 — masked real-data rediscovery
 
-`powershell
+```powershell
 python -m oncodex run A019
 python -m oncodex run A019 --live
-`
+```
 
 A019 masks eleven TCGA projects into identifier-free aggregate profiles, ranks candidate primary
 sites deterministically, screens the ambiguous cases with one batched Noul call, and re-ranks
@@ -296,9 +332,9 @@ escalated cases with OncoX, with a deranged-label null control. The frozen targe
 
 ### A020 — science-efficiency frontier
 
-`powershell
+```powershell
 python -m oncodex run A020
-`
+```
 
 A020 extracts frontier points from immutable recorded results (A012 cascade arms, A019 rediscovery
 arms), computes per-task Pareto dominance, and reports whether the combined arm moves the frontier.
@@ -307,14 +343,16 @@ and reranking rather than selective OncoX triage.
 
 ## Architecture experiment protocols
 
-A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
+A001-A020 are complete declarative protocols, and every protocol currently has a runner.
+Inspect any frozen protocol with:
 
 ```powershell
 python -m oncodex plan A020
 ```
 
-Only A001-A019 currently have runners. A020 are deliberately plan-ready rather than
-pretending that required data, capabilities, or scientific results already exist.
+A019-A020 evaluate under frozen real-data protocols against versioned GDC-derived inputs and
+recorded immutable results. A negative or missed target is a recorded finding, not a missing
+capability.
 
 ## Provider configuration
 
@@ -345,15 +383,24 @@ observatory/                  read-only projections
 experiments/architecture/     A001–A020 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
+docs/tasks/                   reviewed task definitions for the current program
+docs/exec-plans/              execution plans (active and completed)
 tests/                        mechanical invariants
 scripts/                      verification and architecture checks
 ```
 
 ## Non-goals of this scaffold
 
-It does not yet implement a scientific GDC/GDAN pipeline, cancer-specific modalities in core,
-mutation/expression/CNV analysis, a full Observatory, a persistent database schema, RL,
-multi-agent swarms, permanent Jev question batteries, automatic code promotion, or a scientific
-A/B/C benchmark. The current GDC adapter is intentionally limited to read-only public metadata.
+Not yet implemented: a scientific GDC/GDAN analysis pipeline, a full Observatory, a persistent
+database schema, an automated capability-evolution service, or production UI/DB complexity before
+it is needed.
 
-Real open cancer data should enter early, but through source adapters after projection/Jev mechanics are understood; the core must remain source and modality agnostic.
+Deliberately avoided by design: hardcoded modality lanes; fixed modality enumeration in core;
+source-specific "GDCScience"-style architecture; permanent Jev question batteries; global Jev
+thresholds; capability self-promotion; uncontrolled method invention; multi-agent swarms; RL; a
+generic workflow engine.
+
+Not a non-goal: real-data scientific evaluation. A020 was a recorded A/B/C frontier analysis over
+recorded results, and the next milestone is the first capability-neutral scientific investigation.
+The current GDC adapter remains intentionally limited to read-only public metadata. Real open
+cancer data enters through source adapters; the core stays source and modality agnostic.
