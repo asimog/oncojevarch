@@ -1,7 +1,7 @@
 # A006 — deterministic ranking vs Jev reranking
 
-Date: 2026-09-29  
-Class: architecture  
+Date: 2026-09-29
+Class: architecture
 Status: completed; frozen success criteria met
 
 ## Question
