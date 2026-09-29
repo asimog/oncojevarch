@@ -23,13 +23,13 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - optional thin Agents SDK experimental Codex-tool adapter;
 - uncertainty-aware frontier contract;
 - complete frozen A001-A020 architecture experiment protocols;
-- executable A001-A005 architecture experiments;
+- executable A001-A006 architecture experiments;
 - real-data A/B/C evaluation design in docs;
 - architecture checks and tests.
 
 ## Deliberately not implemented
 
-- GDC/GDAN adapters;
+- scientific GDC/GDAN acquisition and analysis pipelines;
 - cancer-specific modalities in core;
 - scientific experiment pipelines;
 - permanent Wide/Deep Jev batteries;
@@ -60,7 +60,12 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - `python -m oncodex run A005 --live` — GDC metadata/count ladder resolved 517 TCGA-LUAD
   cases with both RNA-Seq and WXS file associations using three `size=0` count responses and
   no case records or molecular downloads.
+- `python -m oncodex run A006 --live` — deterministic top-1 recall/precision improved from
+  0.40 to 1.00 after bounded Jev reranking while recall@3 and shortlist membership remained
+  1.00 across all three stable repetitions.
 
 ## First recommended next action
 
-Do not add another large architecture layer. Install dependencies locally, run A001 live, then A002 against a small frozen labeled Jev evaluation set, then replace A003's synthetic cases with a small frozen real open cancer-data slice. Let those experiments determine the next abstraction.
+Proceed to A007 with a frozen mixed set containing adequate and best-of-bad-options cases. Keep
+the Choice and absolute-viability Noul judgments distinct and let the measured false-acceptance
+tradeoff determine whether an absolute gate is justified.

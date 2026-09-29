@@ -11,7 +11,7 @@ There are only two experiment classes: architecture and scientific.
 | A003 | What is the smallest projection that preserves a target semantic judgment? | executable mechanics demo |
 | A004 | Full relevant state vs projected state | executable offline freeze/live Jev evaluation |
 | A005 | When does richer representation materially improve the decision? | executable GDC metadata ladder |
-| A006 | Deterministic ranking vs Jev reranking | frozen protocol |
+| A006 | Deterministic ranking vs Jev reranking | executable GDC metadata/Jev evaluation |
 | A007 | Choice vs Choice + Noul | frozen protocol |
 | A008 | Greedy vs beam search | frozen protocol |
 | A009 | Top-score vs uncertainty/exploration frontier | frozen protocol |

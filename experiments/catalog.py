@@ -122,6 +122,16 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("recall@k", "precision@k", "MRR", "tokens", "latency"),
         ("recall falls or quality gain misses its frozen margin",),
         ("promote scoped reranking or keep deterministic ranking",),
+        executable=True,
+        success=(
+            "both arms retain recall@3 of 1.0",
+            "Jev improves recall@1 by at least 0.2 in every live repetition",
+            "reranking never changes shortlist membership or selects an invalid candidate",
+            (
+                "raw choices, probabilities, tokens, latency, source version, "
+                "and stability are recorded"
+            ),
+        ),
     ),
     _a(
         7,

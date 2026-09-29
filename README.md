@@ -21,7 +21,9 @@ Store     = durable scientific memory
 Observatory = read-only view
 ```
 
-The scaffold intentionally implements only the boundaries, durable experiment records, capability/gap lifecycle, semantic projection contract, minimal search frontier, append-only store, and the first three architecture experiments.
+The scaffold intentionally implements only the boundaries, durable experiment records,
+capability/gap lifecycle, semantic projection contract, minimal search frontier, append-only
+store, and the architecture capabilities earned by A001-A006.
 
 ## Why it is small
 
@@ -133,6 +135,24 @@ A005 uses deterministic set arithmetic to decide whether a richer representation
 case availability. It does not download case records or molecular files and does not use Jev for
 exact counting.
 
+### A006 — deterministic ranking versus Jev reranking
+
+Freeze the project-metadata ranking task:
+
+```powershell
+python -m oncodex run A006
+```
+
+Run three repetitions against one small public GDC metadata slice and the pinned Jev model:
+
+```powershell
+python -m oncodex run A006 --live
+```
+
+A006 fixes shortlist membership with deterministic retrieval. Jev may select only the first-ranked
+candidate; it cannot introduce a project omitted upstream. The task evaluates metadata matching,
+not cancer biology.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -141,7 +161,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A005 currently have runners. A006-A020 are deliberately plan-ready rather than
+Only A001-A006 currently have runners. A007-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -170,7 +190,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A005 implementations
+experiments/architecture/     A001–A006 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants
@@ -179,6 +199,9 @@ scripts/                      verification and architecture checks
 
 ## Non-goals of this scaffold
 
-It does not yet implement GDC, GDAN, TCGA-LUAD, mutation/expression/CNV pipelines, a full Observatory, a persistent database schema, RL, multi-agent swarms, permanent Jev question batteries, automatic code promotion, or a scientific A/B/C benchmark.
+It does not yet implement a scientific GDC/GDAN pipeline, cancer-specific modalities in core,
+mutation/expression/CNV analysis, a full Observatory, a persistent database schema, RL,
+multi-agent swarms, permanent Jev question batteries, automatic code promotion, or a scientific
+A/B/C benchmark. The current GDC adapter is intentionally limited to read-only public metadata.
 
 Real open cancer data should enter early, but through source adapters after projection/Jev mechanics are understood; the core must remain source and modality agnostic.
