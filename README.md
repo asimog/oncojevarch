@@ -153,6 +153,17 @@ A006 fixes shortlist membership with deterministic retrieval. Jev may select onl
 candidate; it cannot introduce a project omitted upstream. The task evaluates metadata matching,
 not cancer biology.
 
+### A007 — Choice plus absolute-viability Noul
+
+```powershell
+python -m oncodex run A007
+python -m oncodex run A007 --live
+```
+
+A007 compares forced relative selection with a separate absolute adequacy gate over viable and
+best-of-bad-options GDC project-description tasks. The gate is evaluated independently; it does
+not turn a semantic judgment into scientific evidence.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -161,7 +172,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A006 currently have runners. A007-A020 are deliberately plan-ready rather than
+Only A001-A007 currently have runners. A008-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -190,7 +201,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A006 implementations
+experiments/architecture/     A001–A007 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

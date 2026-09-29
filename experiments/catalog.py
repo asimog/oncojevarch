@@ -143,6 +143,13 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("false acceptance", "false rejection", "coverage", "calibration"),
         ("combined policy does not reduce false acceptance at acceptable recall",),
         ("adopt or reject the absolute gate for this contract",),
+        executable=True,
+        success=(
+            "false acceptance falls by at least 0.50 in every live repetition",
+            "viable recall remains at least 0.75",
+            "Choice selects no candidate outside the deterministic shortlist",
+            "raw Choice and Noul outputs, calibration, tokens, latency, and stability are recorded",
+        ),
     ),
     _a(
         8,

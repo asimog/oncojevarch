@@ -13,6 +13,7 @@ from experiments.architecture.a003_projection_sufficiency import run as run_a003
 from experiments.architecture.a004_full_vs_projected_state import run as run_a004
 from experiments.architecture.a005_gdc_representation_ladder import run as run_a005
 from experiments.architecture.a006_deterministic_vs_jev_reranking import run as run_a006
+from experiments.architecture.a007_choice_plus_noul import run as run_a007
 from experiments.catalog import EXPERIMENTS, get_experiment
 from oncodex.config import Settings
 
@@ -23,6 +24,7 @@ RUNNERS = {
     "A004": run_a004,
     "A005": run_a005,
     "A006": run_a006,
+    "A007": run_a007,
 }
 
 
@@ -47,7 +49,7 @@ def _status(settings: Settings) -> int:
     print(f"agent_provider: {'openrouter' if settings.openrouter_api_key else 'openai/default'}")
     print(f"jev_model: {settings.jev_model or '(not configured)'}")
     print(f"typesafe_configured: {bool(settings.typesafe_api_key)}")
-    print("implemented experiments: A001, A002, A003, A004, A005, A006")
+    print("implemented experiments: A001, A002, A003, A004, A005, A006, A007")
     print("scientific claims: none")
     return 0
 

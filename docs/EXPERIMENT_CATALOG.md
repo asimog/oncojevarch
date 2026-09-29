@@ -12,7 +12,7 @@ There are only two experiment classes: architecture and scientific.
 | A004 | Full relevant state vs projected state | executable offline freeze/live Jev evaluation |
 | A005 | When does richer representation materially improve the decision? | executable GDC metadata ladder |
 | A006 | Deterministic ranking vs Jev reranking | executable GDC metadata/Jev evaluation |
-| A007 | Choice vs Choice + Noul | frozen protocol |
+| A007 | Choice vs Choice + Noul | executable GDC metadata/Jev evaluation |
 | A008 | Greedy vs beam search | frozen protocol |
 | A009 | Top-score vs uncertainty/exploration frontier | frozen protocol |
 | A010 | What useful candidates were rejected upstream? | frozen protocol |
