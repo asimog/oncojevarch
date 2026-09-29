@@ -221,6 +221,17 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("candidate count", "confidence", "claim rate", "false narrative rate"),
         ("null outputs remain materially persuasive or unstable across seeds",),
         ("tighten evidence gates or reject the affected workflow",),
+        level="semi_synthetic",
+        executable=True,
+        success=(
+            "valid claim rate is at least 0.80 in every repetition",
+            "mean null claim rate is at most 0.20 and no null arm exceeds 0.40",
+            "valid mean probability exceeds null mean probability by at least 0.40",
+            (
+                "raw probabilities, tokens, latency, source receipt, "
+                "and decision stability are recorded"
+            ),
+        ),
     ),
     _a(
         12,

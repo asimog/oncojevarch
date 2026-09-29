@@ -194,6 +194,17 @@ A010 freezes historical decisions before joining later outcomes, then takes an o
 stage-balanced rejection sample. Audit findings append a new evaluation view and never rewrite
 the decision log.
 
+### A011 — null and broken-association controls
+
+```powershell
+python -m oncodex run A011
+python -m oncodex run A011 --live
+```
+
+A011 pairs masked histology tasks with a five-project GDC metadata slice, then compares the valid
+pairing with three no-fixed-point derangements. Python generates controls and thresholds claims;
+Jev supplies only independent Noul probabilities.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -202,7 +213,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A010 currently have runners. A011-A020 are deliberately plan-ready rather than
+Only A001-A011 currently have runners. A012-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -231,7 +242,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A010 implementations
+experiments/architecture/     A001–A011 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

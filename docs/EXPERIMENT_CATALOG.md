@@ -16,7 +16,7 @@ There are only two experiment classes: architecture and scientific.
 | A008 | Greedy vs beam search | executable deterministic replay evaluation |
 | A009 | Top-score vs uncertainty/exploration frontier | executable deterministic evaluation |
 | A010 | What useful candidates were rejected upstream? | executable immutable-log audit |
-| A011 | Does the system produce narratives on null/shuffled data? | frozen protocol |
+| A011 | Does the system produce narratives on null/shuffled data? | executable GDC/Jev controls |
 | A012 | OncoX on all cases vs Jev-screened selective OncoX | frozen protocol |
 | A013 | Jev model-version regression | frozen protocol |
 | A014 | Offline semantic feature discovery generalization | frozen protocol |
