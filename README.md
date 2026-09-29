@@ -294,6 +294,17 @@ sites deterministically, screens the ambiguous cases with one batched Noul call,
 escalated cases with OncoX, with a deranged-label null control. The frozen target was missed
 (recall@1 0.273 against a 0.50 target and 0.20 chance) with no leakage finding.
 
+### A020 — science-efficiency frontier
+
+`powershell
+python -m oncodex run A020
+`
+
+A020 extracts frontier points from immutable recorded results (A012 cascade arms, A019 rediscovery
+arms), computes per-task Pareto dominance, and reports whether the combined arm moves the frontier.
+It did not: the central hypothesis is narrowed, with the Jev layer's recorded value kept in gating
+and reranking rather than selective OncoX triage.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -331,7 +342,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A019 implementations
+experiments/architecture/     A001–A020 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

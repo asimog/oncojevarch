@@ -403,6 +403,13 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("C does not move the Pareto frontier or reduces discovery recall",),
         ("retain, narrow, redesign, or reject the central OncoJev hypothesis",),
         level="retrospective_real",
+        executable=True,
+        success=(
+            "every frontier point is extracted from an immutable recorded experiment result",
+            "dominance is computed on task-relative quality against recorded tokens",
+            "the combined arm's frontier movement is reported per task, not in aggregate",
+            "token and call costs are reported for every arm without claiming monetary cost",
+        ),
     ),
 )
 
