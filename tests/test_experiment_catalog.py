@@ -17,4 +17,9 @@ def test_every_architecture_experiment_has_a_complete_frozen_protocol() -> None:
     assert {e.experiment_id: e.validation_errors() for e in EXPERIMENTS} == {
         e.experiment_id: () for e in EXPERIMENTS
     }
-    assert [e.experiment_id for e in EXPERIMENTS if e.executable] == ["A001", "A002", "A003"]
+    assert [e.experiment_id for e in EXPERIMENTS if e.executable] == [
+        "A001",
+        "A002",
+        "A003",
+        "A004",
+    ]

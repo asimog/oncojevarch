@@ -16,6 +16,7 @@ def _a(
     *,
     level: str = "synthetic",
     executable: bool = False,
+    success: tuple[str, ...] | None = None,
 ) -> ExperimentSpec:
     return ExperimentSpec(
         experiment_id=f"A{number:03d}",
@@ -26,7 +27,8 @@ def _a(
         required_capabilities=capabilities,
         comparison=comparison,
         metrics=metrics,
-        success_criteria=("prespecified comparison is completed", "all metrics are recorded"),
+        success_criteria=success
+        or ("prespecified comparison is completed", "all metrics are recorded"),
         failure_criteria=failure,
         decision_consequences=consequences,
         budget={"max_wall_minutes": 30, "max_live_repetitions": 3},
@@ -84,6 +86,13 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("quality", "calibration", "tokens", "latency", "stability"),
         ("projection exceeds the prespecified quality-loss margin",),
         ("adopt the projection or retain the richer state",),
+        executable=True,
+        success=(
+            "projected accuracy is not lower than full-state accuracy",
+            "no correct full-state case becomes incorrect after projection",
+            "projected serialized state is smaller than full state",
+            "raw paired decisions, probabilities, tokens, and latency are recorded",
+        ),
     ),
     _a(
         5,

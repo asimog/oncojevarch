@@ -98,6 +98,23 @@ python -m oncodex run A003
 
 The included cases are synthetic and test only projection mechanics. Real labeled biological cases are required before scientific conclusions.
 
+### A004 — full state versus question-specific projection
+
+Freeze and inspect the paired synthetic evaluation:
+
+```powershell
+python -m oncodex run A004
+```
+
+Execute both arms against the pinned Jev model:
+
+```powershell
+python -m oncodex run A004 --live
+```
+
+A004 records raw paired decisions and probabilities plus accuracy, arm agreement, serialized
+bytes, tokens, and latency. One synthetic run is an architecture measurement, not validation.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -106,7 +123,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A003 currently have runners. A004-A020 are deliberately plan-ready rather than
+Only A001-A004 currently have runners. A005-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -135,7 +152,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A003 implementations
+experiments/architecture/     A001–A004 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

@@ -32,12 +32,31 @@ def build_projection(
 ) -> SemanticProjection:
     source = tuple(evidence)
     payload = projector(source)
+    return freeze_projection(
+        projection_id=projection_id,
+        version=version,
+        question_id=question_id,
+        source_evidence_ids=tuple(e.evidence_id for e in source),
+        payload=payload,
+    )
+
+
+def freeze_projection(
+    *,
+    projection_id: str,
+    version: str,
+    question_id: str,
+    source_evidence_ids: tuple[str, ...],
+    payload: dict[str, Any],
+) -> SemanticProjection:
+    """Freeze an already-derived payload with deterministic identity and provenance."""
+
     canonical = json.dumps(
         {
             "projection_id": projection_id,
             "version": version,
             "question_id": question_id,
-            "source_evidence_ids": [e.evidence_id for e in source],
+            "source_evidence_ids": list(source_evidence_ids),
             "payload": payload,
         },
         sort_keys=True,
@@ -48,7 +67,7 @@ def build_projection(
         projection_id=projection_id,
         version=version,
         question_id=question_id,
-        source_evidence_ids=tuple(e.evidence_id for e in source),
+        source_evidence_ids=source_evidence_ids,
         payload=payload,
         fingerprint=sha256(canonical.encode("utf-8")).hexdigest(),
     )

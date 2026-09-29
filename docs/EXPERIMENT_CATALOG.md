@@ -9,7 +9,7 @@ There are only two experiment classes: architecture and scientific.
 | A001 | Can OnCodex run independently of the IDE and invoke a bounded read-only Codex workspace task? | executable preflight/live shell |
 | A002 | Do Choice/Noul/Score semantics map cleanly to bounded OncoJev decisions? | executable offline/live shell |
 | A003 | What is the smallest projection that preserves a target semantic judgment? | executable mechanics demo |
-| A004 | Full relevant state vs projected state | frozen protocol |
+| A004 | Full relevant state vs projected state | executable offline freeze/live Jev evaluation |
 | A005 | When does richer representation materially improve the decision? | frozen protocol |
 | A006 | Deterministic ranking vs Jev reranking | frozen protocol |
 | A007 | Choice vs Choice + Noul | frozen protocol |
