@@ -22,7 +22,7 @@ There are only two experiment classes: architecture and scientific.
 | A014 | Offline semantic feature discovery generalization | executable; nothing promoted |
 | A015 | Gap routing and no-self-promotion | executable scenario audit; routing supported |
 | A016 | Full history vs bounded/progressive OnCodex context | executable; bounded context not adopted |
-| A017 | Crash/recovery/idempotency | frozen protocol |
+| A017 | Crash/recovery/idempotency | executable; idempotent resume supported |
 | A018 | Can architecture results justify small reviewable repo changes? | frozen protocol |
 | A019 | Leakage-resistant masked real-data rediscovery | frozen real-data protocol |
 | A020 | Full system A/B/C science-efficiency frontier | frozen real-data protocol |
