@@ -250,6 +250,18 @@ A015 replays ten representative and four adversarial gap scenarios through a one
 and combined-signal routing with kind-owned guards, driving the real capability registry for each
 promotion attempt. Combined-signal routing matched every scenario with zero unsafe activations.
 
+### A016 — bounded progressive context
+
+```powershell
+python -m oncodex run A016
+python -m oncodex run A016 --live
+```
+
+A016 compares replaying a raw investigation history with a deterministic bounded view that pins the
+latest fact values, prunes superseded messages, and records every dropped id. Bounded context was
+not adopted: success was unstable across repetitions and token savings were dominated by the fixed
+instruction block.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -258,7 +270,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A015 currently have runners. A016-A020 are deliberately plan-ready rather than
+Only A001-A016 currently have runners. A017-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -287,7 +299,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A015 implementations
+experiments/architecture/     A001–A016 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

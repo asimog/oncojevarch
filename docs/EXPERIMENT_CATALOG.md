@@ -19,9 +19,9 @@ There are only two experiment classes: architecture and scientific.
 | A011 | Does the system produce narratives on null/shuffled data? | executable GDC/Jev controls |
 | A012 | OncoX on all cases vs Jev-screened selective OncoX | executable OncoX/Jev cascade; cascade not supported |
 | A013 | Jev model-version regression | executable recorded-baseline regression; candidate approved for one contract |
-| A014 | Offline semantic feature discovery generalization | frozen protocol |
-| A015 | Gap routing and no-self-promotion | core tests + frozen protocol |
-| A016 | Full history vs bounded/progressive OnCodex context | frozen protocol |
+| A014 | Offline semantic feature discovery generalization | executable; nothing promoted |
+| A015 | Gap routing and no-self-promotion | executable scenario audit; routing supported |
+| A016 | Full history vs bounded/progressive OnCodex context | executable; bounded context not adopted |
 | A017 | Crash/recovery/idempotency | frozen protocol |
 | A018 | Can architecture results justify small reviewable repo changes? | frozen protocol |
 | A019 | Leakage-resistant masked real-data rediscovery | frozen real-data protocol |

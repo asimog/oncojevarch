@@ -23,7 +23,7 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - optional thin Agents SDK experimental Codex-tool adapter;
 - uncertainty-aware frontier contract;
 - complete frozen A001-A020 architecture experiment protocols;
-- executable A001-A015 architecture experiments;
+- executable A001-A016 architecture experiments;
 - real-data A/B/C evaluation design in docs;
 - architecture checks and tests.
 
@@ -82,8 +82,16 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
   recorded value; `jev-preview` scored 1.00 decision agreement, 0.0070 drift against a 0.0095
   same-model control, and 0.00391 Brier against a 0.00433 baseline, so the candidate was approved
   for that one contract only.
+- `python -m oncodex run A014 --live` — offline feature discovery overfit positional corpus
+  artifacts, Jev endorsed none of the six candidates, and nothing was promoted.
+- `python -m oncodex run A015` — combined-signal gap routing matched 14/14 frozen scenarios with
+  zero unsafe activations, against 0.50 accuracy and one unsafe activation for the one-keyword
+  baseline.
+- `python -m oncodex run A016 --live` — bounded progressive context was not adopted: bounded
+  success moved 0.667 to 1.000 across repetitions while full history stayed at 0.667, token
+  savings were 0.012 then 0.302, and each arm produced one lexical contradiction.
 
 ## First recommended next action
 
-Record A012 as a negative architecture result, then continue with the frozen A013-A020 protocols
-one checkpoint at a time, keeping every live slice as small as the question allows.
+Continue with the frozen A017-A020 protocols one checkpoint at a time, keeping every live slice as
+small as the question allows, and record negative results as first-class outcomes.

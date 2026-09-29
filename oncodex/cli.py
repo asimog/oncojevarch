@@ -22,6 +22,7 @@ from experiments.architecture.a012_jev_oncox_cascade import run as run_a012
 from experiments.architecture.a013_jev_model_regression import run as run_a013
 from experiments.architecture.a014_feature_generalization import run as run_a014
 from experiments.architecture.a015_gap_routing import run as run_a015
+from experiments.architecture.a016_progressive_context import run as run_a016
 from experiments.catalog import EXPERIMENTS, get_experiment
 from oncodex.config import Settings
 
@@ -41,6 +42,7 @@ RUNNERS = {
     "A013": run_a013,
     "A014": run_a014,
     "A015": run_a015,
+    "A016": run_a016,
 }
 
 
@@ -65,7 +67,7 @@ def _status(settings: Settings) -> int:
     print(f"agent_provider: {'openrouter' if settings.openrouter_api_key else 'openai/default'}")
     print(f"jev_model: {settings.jev_model or '(not configured)'}")
     print(f"typesafe_configured: {bool(settings.typesafe_api_key)}")
-    print("implemented experiments: A001-A015")
+    print("implemented experiments: A001-A016")
     print("scientific claims: none")
     return 0
 
