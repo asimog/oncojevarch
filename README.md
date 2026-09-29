@@ -272,6 +272,16 @@ A017 runs a six-step deterministic operation over the append-only store under in
 interruptions. Artifact identity is stable per operation step, so interrupts and resumes reach the
 same final digest with six artifacts and zero duplicate writes.
 
+### A018 — bounded reviewable change proposals
+
+`powershell
+python -m oncodex run A018
+`
+
+A018 compiles two change requests from the recorded A012 finding: a bounded, fully traced proposal
+and an unbounded rewrite. It applies the bounded patch only in a scratch copy, runs compilation,
+focused tests, and architecture checks there, and records the proposal for human review.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -280,7 +290,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A017 currently have runners. A018-A020 are deliberately plan-ready rather than
+Only A001-A018 currently have runners. A019-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -309,7 +319,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A017 implementations
+experiments/architecture/     A001–A018 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

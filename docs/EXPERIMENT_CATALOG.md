@@ -23,7 +23,7 @@ There are only two experiment classes: architecture and scientific.
 | A015 | Gap routing and no-self-promotion | executable scenario audit; routing supported |
 | A016 | Full history vs bounded/progressive OnCodex context | executable; bounded context not adopted |
 | A017 | Crash/recovery/idempotency | executable; idempotent resume supported |
-| A018 | Can architecture results justify small reviewable repo changes? | frozen protocol |
+| A018 | Can architecture results justify small reviewable repo changes? | executable; bounded proposal accepted for review |
 | A019 | Leakage-resistant masked real-data rediscovery | frozen real-data protocol |
 | A020 | Full system A/B/C science-efficiency frontier | frozen real-data protocol |
 
