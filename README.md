@@ -205,6 +205,19 @@ A011 pairs masked histology tasks with a five-project GDC metadata slice, then c
 pairing with three no-fixed-point derangements. Python generates controls and thresholds claims;
 Jev supplies only independent Noul probabilities.
 
+### A012 — Jev triage versus OncoX on every case
+
+```powershell
+python -m oncodex run A012
+python -m oncodex run A012 --live
+```
+
+A012 locks ten cases built from real GDC project aggregates, five whose recorded structured state
+already resolves the claim's material question and five that stay open, then compares OncoX on
+every case with a Noul-triaged cascade. The frozen result was negative: bounded triage escalated
+every live case, so it saved no OncoX calls; the cascade is not supported for this contract and the
+rubric mechanics, adapter, and false-negative accounting are retained.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -213,7 +226,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A011 currently have runners. A012-A020 are deliberately plan-ready rather than
+Only A001-A012 currently have runners. A013-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -242,7 +255,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A011 implementations
+experiments/architecture/     A001–A012 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

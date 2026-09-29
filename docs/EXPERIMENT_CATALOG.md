@@ -17,7 +17,7 @@ There are only two experiment classes: architecture and scientific.
 | A009 | Top-score vs uncertainty/exploration frontier | executable deterministic evaluation |
 | A010 | What useful candidates were rejected upstream? | executable immutable-log audit |
 | A011 | Does the system produce narratives on null/shuffled data? | executable GDC/Jev controls |
-| A012 | OncoX on all cases vs Jev-screened selective OncoX | frozen protocol |
+| A012 | OncoX on all cases vs Jev-screened selective OncoX | executable OncoX/Jev cascade; cascade not supported |
 | A013 | Jev model-version regression | frozen protocol |
 | A014 | Offline semantic feature discovery generalization | frozen protocol |
 | A015 | Gap routing and no-self-promotion | core tests + frozen protocol |

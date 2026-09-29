@@ -243,6 +243,18 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("quality", "OncoX calls", "tokens", "cost", "false-negative burden"),
         ("quality loss exceeds margin or savings miss target",),
         ("adopt scoped triage or retain all-case reasoning",),
+        level="semi_synthetic",
+        executable=True,
+        success=(
+            "every locked case is evaluated in both arms with identical case identity",
+            "screened-out cases never call OncoX and escalated cases call OncoX exactly once",
+            "no case that OncoX-all judged useful is screened out",
+            "quality loss does not exceed 0.05 and OncoX calls fall by at least 0.30",
+            (
+                "raw triage probabilities, reasoning text, tokens, latency, and wall time "
+                "are recorded separately per arm"
+            ),
+        ),
     ),
     _a(
         13,

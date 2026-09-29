@@ -23,7 +23,7 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - optional thin Agents SDK experimental Codex-tool adapter;
 - uncertainty-aware frontier contract;
 - complete frozen A001-A020 architecture experiment protocols;
-- executable A001-A011 architecture experiments;
+- executable A001-A012 architecture experiments;
 - real-data A/B/C evaluation design in docs;
 - architecture checks and tests.
 
@@ -73,8 +73,13 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
   misses among six audited rejections, both assigned actionable follow-up classes.
 - `python -m oncodex run A011 --live` — all five valid project-description pairs claimed while
   all fifteen deranged pairs stayed null in each of three stable repetitions.
+- `python -m oncodex run A012 --live` — the frozen cascade was **not** supported: bounded Noul
+  triage escalated all four live cases (probabilities 0.61–0.92), so OncoX call reduction was 0.00
+  against a 0.30 target, with zero false negatives. The OncoX adapter, rubric mechanics, and
+  false-negative accounting are retained; a revised triage contract needs a new experiment
+  identity.
 
 ## First recommended next action
 
-Proceed to A012 with a locked outcome rubric and explicit OncoX cost model. Compare all-case deep
-reasoning with Jev-screened reasoning while measuring every false negative at the triage boundary.
+Record A012 as a negative architecture result, then continue with the frozen A013-A020 protocols
+one checkpoint at a time, keeping every live slice as small as the question allows.

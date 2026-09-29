@@ -26,6 +26,29 @@ Versions observed at scaffold creation:
 - `openai-agents` 0.22.3 (PyPI release 2026-09-17)
 - `openai-codex` 0.158.0 (PyPI release 2026-09-28)
 
+## OpenRouter provider route (OncoX / OnCodex model edge)
+
+- Model card and confirmed APIs: https://openrouter.ai/deepseek/deepseek-v4.1-flash/llms.txt
+- Reasoning token control: https://openrouter.ai/docs/guides/overview/models
+- Models list: https://openrouter.ai/api/v1/models
+
+Facts revalidated 2026-09-29 for the pinned live route `deepseek/deepseek-v4.1-flash`:
+
+- the only confirmed OpenRouter API serving this model is Chat Completions
+  (`POST /api/v1/chat/completions`), which is the surface the Agents SDK
+  `OpenAIChatCompletionsModel` boundary already uses; the Responses API is not required and was
+  not adopted;
+- `supported_parameters` includes `response_format` and `structured_outputs`, so the SDK's
+  `json_schema` response format is a supported request shape;
+- `reasoning.supported_efforts` is `["max", "high", "low"]` with `default_effort: "high"` and
+  `mandatory: false`;
+- reasoning tokens are counted as output tokens and count against `max_tokens`, so a small
+  `max_tokens` cap can be consumed entirely by reasoning and return `finish_reason: length` with
+  empty content. OncoX therefore leaves the completion budget at the provider default and pins
+  `reasoning.effort` explicitly per experiment.
+- `usage.cost` is returned by OpenRouter, but the Agents SDK usage object used here exposes token
+  counts only; OncoX records tokens and does not invent a monetary estimate.
+
 ## TypeSafe / Jev
 
 - Documentation index requested by project baseline: https://docs.typesafe.ai/llms.txt

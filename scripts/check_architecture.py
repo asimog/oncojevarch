@@ -23,6 +23,7 @@ FORBIDDEN: dict[str, set[str]] = {
     "evidence": {"oncodex", "oncox", "discovery", "observatory"},
     "execution": {"oncodex", "oncox", "discovery", "observatory", "jev"},
     "store": {"oncodex", "oncox", "discovery", "execution", "jev", "evidence", "research"},
+    "oncox": {"oncodex"},
 }
 REQUIRED_DOCS = {
     "AGENTS.md",
