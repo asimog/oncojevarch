@@ -115,6 +115,24 @@ python -m oncodex run A004 --live
 A004 records raw paired decisions and probabilities plus accuracy, arm agreement, serialized
 bytes, tokens, and latency. One synthetic run is an architecture measurement, not validation.
 
+### A005 — cheapest sufficient GDC representation
+
+Freeze the acquisition ladder:
+
+```powershell
+python -m oncodex run A005
+```
+
+Query only public GDC metadata, facets, and `size=0` counts:
+
+```powershell
+python -m oncodex run A005 --live
+```
+
+A005 uses deterministic set arithmetic to decide whether a richer representation resolves paired
+case availability. It does not download case records or molecular files and does not use Jev for
+exact counting.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -123,7 +141,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A004 currently have runners. A005-A020 are deliberately plan-ready rather than
+Only A001-A005 currently have runners. A006-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -152,7 +170,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A004 implementations
+experiments/architecture/     A001–A005 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants

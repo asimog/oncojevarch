@@ -61,6 +61,11 @@ Reference only, not architecture dependencies:
 - https://github.com/NCI-GDC/gdcdatamodel2
 - https://github.com/NCI-GDC/gdc-client
 - https://docs.gdc.cancer.gov/API/Users_Guide/Getting_Started/
+- https://docs.gdc.cancer.gov/API/Users_Guide/Search_and_Retrieval/
 - https://docs.gdc.cancer.gov/Data_Dictionary/
+
+Live A005 metadata queries were run against GDC Data Release 46.0 (2026-08-10), API tag
+8.5.0. The experiment used project metadata, file facets, and `size=0` case counts only.
+Re-check `/status` and record the release for every future GDC experiment.
 
 Extract general lessons about source contracts, entity identity, harmonization, provenance, query strategy, cheap representations, and reproducibility.

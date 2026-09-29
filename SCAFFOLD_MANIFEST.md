@@ -23,7 +23,7 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - optional thin Agents SDK experimental Codex-tool adapter;
 - uncertainty-aware frontier contract;
 - complete frozen A001-A020 architecture experiment protocols;
-- executable A001-A004 architecture experiments;
+- executable A001-A005 architecture experiments;
 - real-data A/B/C evaluation design in docs;
 - architecture checks and tests.
 
@@ -57,6 +57,9 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
   and usage accounting.
 - `python -m oncodex run A004 --live` — both frozen arms produced 4/4 expected decisions;
   the projection reduced serialized state by 25.27% and input tokens from 1,715 to 1,500.
+- `python -m oncodex run A005 --live` — GDC metadata/count ladder resolved 517 TCGA-LUAD
+  cases with both RNA-Seq and WXS file associations using three `size=0` count responses and
+  no case records or molecular downloads.
 
 ## First recommended next action
 

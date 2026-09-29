@@ -99,12 +99,18 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         "When does a richer representation materially improve the decision?",
         "Representation upgrades help only identifiable uncertainty strata and should be "
         "selective.",
-        ("cases with staged metadata, aggregates, tables, and raw views",),
-        ("representation ladder", "Jev evaluator"),
+        ("versioned GDC project metadata", "file facets", "targeted case counts"),
+        ("GDC metadata adapter", "representation ladder", "deterministic acquisition policy"),
         ("each adjacent representation level",),
-        ("incremental quality", "bytes", "latency", "cost per corrected decision"),
+        ("decision resolution", "response bytes", "latency", "records downloaded"),
         ("richer state adds cost without prespecified benefit",),
         ("define or reject a bounded acquisition policy",),
+        executable=True,
+        success=(
+            "a richer aggregate resolves a decision that cheaper representations cannot",
+            "the resolved decision requires no case records or molecular file download",
+            "source version, response bytes, latency, and limitations are recorded",
+        ),
     ),
     _a(
         6,

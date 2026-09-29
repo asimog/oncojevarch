@@ -11,10 +11,17 @@ from experiments.architecture.a001_oncodex_codex_smoke import run as run_a001
 from experiments.architecture.a002_jev_primitives import run as run_a002
 from experiments.architecture.a003_projection_sufficiency import run as run_a003
 from experiments.architecture.a004_full_vs_projected_state import run as run_a004
+from experiments.architecture.a005_gdc_representation_ladder import run as run_a005
 from experiments.catalog import EXPERIMENTS, get_experiment
 from oncodex.config import Settings
 
-RUNNERS = {"A001": run_a001, "A002": run_a002, "A003": run_a003, "A004": run_a004}
+RUNNERS = {
+    "A001": run_a001,
+    "A002": run_a002,
+    "A003": run_a003,
+    "A004": run_a004,
+    "A005": run_a005,
+}
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -38,7 +45,7 @@ def _status(settings: Settings) -> int:
     print(f"agent_provider: {'openrouter' if settings.openrouter_api_key else 'openai/default'}")
     print(f"jev_model: {settings.jev_model or '(not configured)'}")
     print(f"typesafe_configured: {bool(settings.typesafe_api_key)}")
-    print("implemented experiments: A001, A002, A003, A004")
+    print("implemented experiments: A001, A002, A003, A004, A005")
     print("scientific claims: none")
     return 0
 
