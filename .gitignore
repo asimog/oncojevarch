@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+dist/
+build/
+*.egg-info/
+
+# Local runtime state
+.oncojev/
+.env
+.env.local
+
+# Prompts are local/ephemeral unless deliberately promoted into docs
+.prompts/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
