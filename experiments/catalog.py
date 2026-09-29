@@ -375,6 +375,13 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("mask is reversible, null control succeeds, or target misses threshold",),
         ("advance to independent validation or revise/reject the architecture",),
         level="retrospective_real",
+        executable=True,
+        success=(
+            "identifiers, names, sites, and disease types are absent from every arm input",
+            "the recorded null control stays at chance for a deranged label assignment",
+            "the prespecified target recall@1 is met by the best arm",
+            "recall@k, rank, tokens, and leakage indicators are recorded for every arm",
+        ),
     ),
     _a(
         20,

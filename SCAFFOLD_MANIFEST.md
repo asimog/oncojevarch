@@ -23,7 +23,7 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - optional thin Agents SDK experimental Codex-tool adapter;
 - uncertainty-aware frontier contract;
 - complete frozen A001-A020 architecture experiment protocols;
-- executable A001-A018 architecture experiments;
+- executable A001-A019 architecture experiments;
 - real-data A/B/C evaluation design in docs;
 - architecture checks and tests.
 
@@ -96,6 +96,11 @@ This is an experiment-first repository scaffold derived from the canonical OncoJ
 - `python -m oncodex run A018` — the bounded, fully traced A012-wording proposal (13 lines, one
   file) passed compilation, focused tests, and architecture checks in a scratch copy and was
   recorded for human review; the unbounded request was rejected on all three bounds.
+
+- python -m oncodex run A019 --live — the deterministic arm reached recall@1 0.273 against 0.20
+  chance; one Jev screen (probabilities 0.34 and 0.35) escalated nothing, so no OncoX call was
+  spent; the null control sat at 0.00 recall@1 and no leakage indicator fired, but the 0.50 target
+  was missed.
 
 ## First recommended next action
 

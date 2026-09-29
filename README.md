@@ -282,6 +282,18 @@ A018 compiles two change requests from the recorded A012 finding: a bounded, ful
 and an unbounded rewrite. It applies the bounded patch only in a scratch copy, runs compilation,
 focused tests, and architecture checks there, and records the proposal for human review.
 
+### A019 — masked real-data rediscovery
+
+`powershell
+python -m oncodex run A019
+python -m oncodex run A019 --live
+`
+
+A019 masks eleven TCGA projects into identifier-free aggregate profiles, ranks candidate primary
+sites deterministically, screens the ambiguous cases with one batched Noul call, and re-ranks
+escalated cases with OncoX, with a deranged-label null control. The frozen target was missed
+(recall@1 0.273 against a 0.50 target and 0.20 chance) with no leakage finding.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -290,7 +302,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A018 currently have runners. A019-A020 are deliberately plan-ready rather than
+Only A001-A019 currently have runners. A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -319,7 +331,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A018 implementations
+experiments/architecture/     A001–A019 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants
