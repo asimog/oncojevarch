@@ -13,7 +13,7 @@ There are only two experiment classes: architecture and scientific.
 | A005 | When does richer representation materially improve the decision? | executable GDC metadata ladder |
 | A006 | Deterministic ranking vs Jev reranking | executable GDC metadata/Jev evaluation |
 | A007 | Choice vs Choice + Noul | executable GDC metadata/Jev evaluation |
-| A008 | Greedy vs beam search | frozen protocol |
+| A008 | Greedy vs beam search | executable deterministic replay evaluation |
 | A009 | Top-score vs uncertainty/exploration frontier | frozen protocol |
 | A010 | What useful candidates were rejected upstream? | frozen protocol |
 | A011 | Does the system produce narratives on null/shuffled data? | frozen protocol |

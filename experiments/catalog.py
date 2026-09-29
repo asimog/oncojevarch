@@ -161,6 +161,13 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
         ("terminal recall", "branch diversity", "evaluations", "wall time"),
         ("no recall gain or budget overrun",),
         ("choose a bounded width or retain greedy search",),
+        executable=True,
+        success=(
+            "beam width 2 improves terminal recall by at least 0.25 over greedy",
+            "width 2 evaluates at most 1.75 times as many edges as greedy",
+            "two deterministic replays produce identical decisions and metrics",
+            "width 1, 2, and 3 results expose recall, diversity, evaluations, and wall time",
+        ),
     ),
     _a(
         9,

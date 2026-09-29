@@ -164,6 +164,16 @@ A007 compares forced relative selection with a separate absolute adequacy gate o
 best-of-bad-options GDC project-description tasks. The gate is evaluated independently; it does
 not turn a semantic judgment into scientific evidence.
 
+### A008 — greedy versus bounded beam search
+
+```powershell
+python -m oncodex run A008
+```
+
+A008 replays six locked probability trees through beam widths 1, 2, and 3. It uses a
+length-normalized geometric-mean path score, records every evaluated edge, and keeps synthetic
+search-mechanics evidence separate from biological validation.
+
 ## Architecture experiment protocols
 
 A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
@@ -172,7 +182,7 @@ A001-A020 are complete declarative protocols. Inspect any frozen protocol with:
 python -m oncodex plan A020
 ```
 
-Only A001-A007 currently have runners. A008-A020 are deliberately plan-ready rather than
+Only A001-A008 currently have runners. A009-A020 are deliberately plan-ready rather than
 pretending that required data, capabilities, or scientific results already exist.
 
 ## Provider configuration
@@ -201,7 +211,7 @@ oncox/                        deep-reasoning boundary
 evaluation/                   evaluation contracts and A/B/C design
 store/                        generic append-only persistence
 observatory/                  read-only projections
-experiments/architecture/     A001–A007 implementations
+experiments/architecture/     A001–A008 implementations
 experiments/scientific/       intentionally empty except guidance
 docs/                         durable project knowledge
 tests/                        mechanical invariants
