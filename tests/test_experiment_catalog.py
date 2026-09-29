@@ -9,7 +9,7 @@ def test_only_two_experiment_classes_exist() -> None:
 
 def test_initial_catalog_is_stable_and_unique() -> None:
     ids = [e.experiment_id for e in EXPERIMENTS]
-    assert ids == [f"A{i:03d}" for i in range(1, 26)]
+    assert ids == [f"A{i:03d}" for i in range(1, 28)]
     assert len(ids) == len(set(ids))
     assert all(e.experiment_class is ExperimentClass.ARCHITECTURE for e in EXPERIMENTS)
 
@@ -44,6 +44,8 @@ def test_every_architecture_experiment_has_a_complete_frozen_protocol() -> None:
         "A023",
         "A024",
         "A025",
+        "A026",
+        "A027",
     ]
 
 

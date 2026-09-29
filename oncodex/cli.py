@@ -32,6 +32,8 @@ from experiments.architecture.a022_capability_search_evaluation import run as ru
 from experiments.architecture.a023_gap_loop import run as run_a023
 from experiments.architecture.a024_research_control_loop import run as run_a024
 from experiments.architecture.a025_repaired_capability_search import run as run_a025
+from experiments.architecture.a026_abc_agent_runtimes import run as run_a026
+from experiments.architecture.a027_gap_evolution import run as run_a027
 from experiments.catalog import EXPERIMENTS, get_experiment
 from experiments.scientific.catalog import SCIENTIFIC_EXPERIMENTS
 from experiments.scientific.s001_public_metadata_association import run as run_s001
@@ -64,6 +66,8 @@ RUNNERS = {
     "A023": run_a023,
     "A024": run_a024,
     "A025": run_a025,
+    "A026": run_a026,
+    "A027": run_a027,
     "S001": run_s001,
     "S002": run_s002,
 }
@@ -92,7 +96,7 @@ def _status(settings: Settings) -> int:
     print(f"agent_provider: {'openrouter' if settings.openrouter_api_key else 'openai/default'}")
     print(f"jev_model: {settings.jev_model or '(not configured)'}")
     print(f"typesafe_configured: {bool(settings.typesafe_api_key)}")
-    print("implemented experiments: A001-A025 and S001-S002")
+    print("implemented experiments: A001-A027 and S001-S002")
     print("scientific claims: none")
     return 0
 

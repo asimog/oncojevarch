@@ -1,7 +1,7 @@
 # Evidence-gated program (9 tasks)
 
-Status: COMPLETE through the evidence boundary; Tasks 6-9 have recorded gated outcomes, not silent
-completions.
+Status: Tasks 1-5 complete; Tasks 6-7 wired and live-verified at the runtime level; Tasks 8-9
+remain gated. See `docs/exec-plans/completed/0003-abc-agent-runtimes.md` for the latest evidence.
 Created: 2026-09-30
 Base commit: `711824f`
 Execution record: `docs/exec-plans/completed/0002-evidence-gated-nine-task-program.md`

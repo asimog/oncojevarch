@@ -513,6 +513,60 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
             "limitations still state that semantic retrieval is not justified by this evidence",
         ),
     ),
+    _a(
+        26,
+        "Do independent A/B/C agent runtimes execute the bounded loop in sandboxes?",
+        "Each arm drives the same deterministic step through its own tool surface; only arm C "
+        "adds Jev judgment, and no reasoning output becomes evidence.",
+        ("frozen synthetic investigation", "sandboxed scratch workspaces"),
+        ("research step", "capability tools", "OncoX port", "Jev client", "sandbox control"),
+        ("arm A deterministic", "arm B plus OncoX", "arm C plus Jev plus OncoX"),
+        (
+            "arm outcomes",
+            "reasoning records",
+            "budget account",
+            "sandbox journal",
+            "evidence boundary",
+        ),
+        ("a reasoning or judgment record becomes evidence", "an arm bypasses admission or budget"),
+        ("use the runtimes for an agent-driven investigation or repair the runtime",),
+        executable=True,
+        success=(
+            "each arm produces exactly one admitted measurement and no reasoning-derived "
+            "evidence",
+            "arm B records one interpretation; arm C records one judgment and one interpretation",
+            "budgets and sandbox actions are recorded for every arm",
+        ),
+    ),
+    _a(
+        27,
+        "Does a capability absence become a routed gap that closes only through governed "
+        "evolution?",
+        "The agent runtime records a routed gap, a MethodGap stays out of engineering, and the "
+        "smallest justified capability closes the gap only after verified activation.",
+        ("frozen synthetic fixture", "frozen gap scenarios"),
+        ("agent runtime", "gap ledger", "promotion gates", "bounded activation"),
+        ("gap without capability", "promoted capability then executed"),
+        (
+            "gap route",
+            "blocked unsafe promotion",
+            "activation evidence",
+            "method-gap isolation",
+        ),
+        (
+            "an unverified capability executes",
+            "a MethodGap is implemented directly",
+            "the gap does not close after evolution",
+        ),
+        ("extend the same path to a real scientific need or repair governance",),
+        executable=True,
+        success=(
+            "the real need records a capability gap routed to engineering before any "
+            "implementation",
+            "a skip-step promotion is blocked and activation precedes the closing measurement",
+            "the MethodGap routes to scientific research and is not implemented",
+        ),
+    ),
 )
 
 

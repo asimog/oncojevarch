@@ -294,7 +294,10 @@ level beyond L2 may be claimed until its protocol is frozen and executed.
   metadata, not the scientific type system;
 - OnCodex does not yet identify the next information need from scientific state; the research step
   takes the need as an input;
-- agent-side Jev/OncoX invocation and automated capability evolution remain target contracts;
+- the A/B/C arm runtimes exist and were live-verified inside sandboxes (A026), but no real-data
+  scientific experiment has yet been driven through an arm runtime;
+- automated capability evolution remains a target contract (governed evolution is code-driven and
+  verified by A027);
 - the multiplicity mode declaration is documented but not yet enforced by a catalog field;
 - level entry/exit gates are reviewed by reading, not mechanically enforced end-to-end;
 - CI installs the optional extras but the workflow change is unverified until the next push.

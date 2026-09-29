@@ -353,6 +353,16 @@ python -m oncodex run A025
 
 A021 admits a measured result into ScientificEvidence and records a refused value-less measurement. A022 evaluates raw token-overlap capability search against a substring baseline and records it failing its frozen rule; A025 re-evaluates the repaired mechanism under a new identity. A023 exercises all four gap kinds, promotion gates, bounded activation, and the refusal of reasoning-only results. A024 proves a research step persists evidence or gaps independently of any agent session.
 
+### A026-A027 — sandboxed A/B/C agent runtimes and gap-evolution proof
+
+```powershell
+python -m oncodex run A026
+python -m oncodex run A026 --live
+python -m oncodex run A027
+```
+
+A026 runs three independent runtimes - A deterministic, B plus OncoX, C plus Jev plus OncoX - inside controlled sandboxes with declared call budgets and an append-only action journal. Offline arms use deterministic doubles; live arms drive real Agents SDK sessions with live OncoX (deepseek) and live Jev (jev-1.13.0) calls. A027 proves a capability absence becomes a routed gap that closes only through governed promotion and activation, while a MethodGap routes to scientific research and is never implemented directly.
+
 ### S001-S002 — first scientific investigations
 
 ```powershell

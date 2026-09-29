@@ -6,6 +6,8 @@ from experiments.architecture.a022_capability_search_evaluation import run as ru
 from experiments.architecture.a023_gap_loop import run as run_a023
 from experiments.architecture.a024_research_control_loop import run as run_a024
 from experiments.architecture.a025_repaired_capability_search import run as run_a025
+from experiments.architecture.a026_abc_agent_runtimes import run as run_a026
+from experiments.architecture.a027_gap_evolution import run as run_a027
 from oncodex.config import Settings
 
 
@@ -68,6 +70,36 @@ def test_repaired_search_meets_the_rule_a022_failed(tmp_path: Path) -> None:
     assert measurements["arms"]["repaired_token_overlap"]["top1_correct"] == 6
     assert measurements["arms"]["repaired_token_overlap"]["false_hits"] == 0
     assert measurements["arms"]["repaired_token_overlap"]["misses_detected"] == 2
+
+
+def test_abc_runtimes_keep_the_evidence_boundary(tmp_path: Path) -> None:
+    payload = json.loads(run_a026(settings=_settings(tmp_path)))
+
+    measurements = payload["measurements"]
+    arms = {record["arm"]: record for record in measurements["arms"]}
+    assert measurements["evidence_boundary_held"] is True
+    assert measurements["live_records"] == []
+    assert arms["a_deterministic"]["oncox_record"] is None
+    assert arms["a_deterministic"]["jev_record"] is None
+    assert arms["b_deterministic_plus_oncox"]["oncox_record"]["creates_evidence"] is False
+    assert arms["b_deterministic_plus_oncox"]["jev_record"] is None
+    assert arms["c_deterministic_plus_jev_plus_oncox"]["jev_record"]["creates_evidence"] is False
+    assert arms["c_deterministic_plus_jev_plus_oncox"]["budget"]["jev_calls"] == 1
+
+
+def test_gap_closes_only_after_governed_evolution(tmp_path: Path) -> None:
+    payload = json.loads(run_a027(settings=_settings(tmp_path)))
+
+    measurements = payload["measurements"]
+    assert measurements["phase1_outcome"] == "gap"
+    assert measurements["phase1_gap_route"] == "engineering"
+    assert measurements["phase1_jev_answer"] == "pursue"
+    assert measurements["unsafe_promotions_blocked"] == 1
+    assert measurements["pre_activation_unmet"] != []
+    assert measurements["phase2_outcome"] == "evidence"
+    assert measurements["gap_closed"] is True
+    assert measurements["method_gap_route"] == "scientific_research"
+    assert measurements["method_gap_implemented"] is False
 
 
 def test_control_loop_is_session_independent(tmp_path: Path) -> None:
