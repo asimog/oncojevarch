@@ -44,7 +44,7 @@ def artifact_identity(*, operation_id: str, step: str, payload: dict[str, Any]) 
     """Stable artifact identity: the same operation and step cannot produce two artifacts."""
 
     canonical = repr(sorted(payload.items()))
-    return sha256(f"{operation_id}::{step}::{canonical}".encode("utf-8")).hexdigest()
+    return sha256(f"{operation_id}::{step}::{canonical}".encode()).hexdigest()
 
 
 def _digest(payload: dict[str, Any]) -> str:
