@@ -232,9 +232,12 @@ flowchart TD
 OnCodex chooses and acts. OncoLab constrains, validates, and remembers. Execution measures. Jev
 judges. Python decides. OncoX explains and hypothesizes. Store persists. Observatory reads.
 
-Current implementation status is tracked in `README.md` and `docs/EVALUATION.md`. Several edges
-above are contracts rather than wired production paths today: automatic evidence admission,
-agent-side Jev/OncoX invocation, and automated capability evolution.
+Implementation status (2026-09-30): the deterministic nucleus (evidence admission, investigation
+revisions, investigation/evidence ledgers), deterministic capability search, the gap ledger, and a
+session-independent research step are implemented and experimentally exercised (A021-A025, S002;
+see `docs/tasks/README.md`). Evidence admission is wired. Agent-side Jev/OncoX invocation,
+automated capability evolution, and typed capability output contracts remain target contracts; the
+capability search is an initial evaluated mechanism, not established retrieval architecture.
 
 ## Experiment classes
 

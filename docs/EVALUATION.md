@@ -15,7 +15,7 @@ Architecture success is not scientific validation. Synthetic success validates m
 |---|---|---|---|
 | 0 | synthetic | A001-A010, A013-A018 | executed; mechanics and component ablations only |
 | 1 | semi-synthetic | A011, A012 | executed; A012 negative (triage escalated every case, no OncoX saved) |
-| 2 | retrospective real data | A019, A020 | executed; A019 missed its frozen target (no leakage), A020 moved no frontier |
+| 2 | retrospective real data | A019, A020, S001, S002 | architecture: A019 missed its frozen target (no leakage), A020 moved no frontier; scientific: S001 failed a frozen threshold, S002 completed with an admitted exploratory measurement (`ev-s002`) |
 | 3 | independent real-data validation | none | declared in `evaluation/models.py`; no frozen protocol or runner |
 | 4 | temporal/prospective | none | declared in `evaluation/models.py`; no frozen protocol or runner |
 
@@ -26,6 +26,9 @@ retrospective real data has a protocol, runner, or recorded result.
 
 - The evaluation machinery has exercised L0-L2. That is not scientific readiness.
 - OncoJev has **not** demonstrated successful scientific cancer-discovery validation through L2.
+- S002 is the first admitted scientific measurement (`ev-s002`): an exploratory public-metadata
+  null result, not a disease-biology validation, and its null was degenerate (all 33 projects
+  carry both assays).
 - A019 is a retrospective-real architecture evaluation that missed its frozen rediscovery target.
 - A020 is a frontier analysis over recorded experiment results, not a new prospective run.
 - L3/L4 remain unexecuted; no compatibility contract or temporal protocol has been frozen.
@@ -277,14 +280,21 @@ failure/stop rules.
 The next scientific milestone is capability-neutral: use the autonomous harness on a scientifically
 meaningful investigation in which OnCodex determines what information is required, searches for
 applicable capabilities, exposes gaps, and evolves only justified capabilities (see README
-"Current phase"). No level beyond L2 may be claimed until its protocol is frozen and executed.
+"Current phase"). The first such investigation ran (S002); the immediate next step is an
+investigation whose question has discriminating variance (S002's null was degenerate) or whose
+required capability genuinely does not exist, so the gap path is exercised on real science. No
+level beyond L2 may be claimed until its protocol is frozen and executed.
 
 ## Open gaps
 
 - no Level 3 or Level 4 protocol exists; the level names in `evaluation/models.py` are declarative
-  until a frozen protocol exists;
+  until a frozen protocol exists, and no candidate/prediction exists yet to validate;
 - no compatibility-contract artifact exists yet for a Level 3 dataset;
+- typed capability output contracts are not yet earned; `CapabilityRecord` carries discovery
+  metadata, not the scientific type system;
+- OnCodex does not yet identify the next information need from scientific state; the research step
+  takes the need as an input;
+- agent-side Jev/OncoX invocation and automated capability evolution remain target contracts;
 - the multiplicity mode declaration is documented but not yet enforced by a catalog field;
 - level entry/exit gates are reviewed by reading, not mechanically enforced end-to-end;
-- evidence admission (`MeasuredResult -> ScientificEvidence`) has no implemented owner yet; the
-  next milestone will need it.
+- CI installs the optional extras but the workflow change is unverified until the next push.

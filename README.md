@@ -33,11 +33,11 @@ Capability evolution is infrastructure around the three scientific tiers, never 
 
 ## Current phase
 
-A001-A020 tested architecture hypotheses and are recorded in `docs/EXPERIMENT_CATALOG.md`; several narrowed or rejected their candidate capabilities (A012, A014, A016, A019, A020). The next phase is not "build a fixed cancer pipeline." It is:
+A001-A025 are recorded architecture experiments; several narrowed or rejected their candidate capabilities (A012, A014, A016, A019, A020), and A022 recorded the initial capability-search mechanism failing its own frozen rule before A025 re-evaluated the minimal repair under a new identity. The executable scientific nucleus now exists: evidence admission, investigation revisions, and a session-independent research step (see `docs/tasks/README.md`).
 
-> Use the autonomous harness on scientifically meaningful investigations in which OnCodex determines what information is required, searches for applicable capabilities, exposes gaps where capabilities are absent, evolves only justified capabilities, and uses the three-tier intelligence system where appropriate.
+S001 and S002 are the first scientific investigations (GDC public metadata, capability-neutral). S001 failed against its frozen minimum-project threshold; S002 completed live and recorded the first admitted scientific measurement (`ev-s002`) — TCGA assay co-availability shows no site association beyond its independence null, and the null is degenerate because all 33 projects carry both assays. This is exploratory metadata evidence, not disease biology.
 
-The scientific question determines the source, measurements, methods, capabilities, semantic questions, and follow-up reasoning. The architecture does not. The reviewed task program for this phase is tracked in `docs/tasks/`.
+The next phase is not "build a fixed cancer pipeline." It is to run capability-neutral investigations where the scientific question determines source, measurements, methods, and capabilities; Jev, OncoX, A/B/C, and L3/L4 remain gated on their recorded evidence triggers.
 
 ## Mental model
 
@@ -340,6 +340,27 @@ A020 extracts frontier points from immutable recorded results (A012 cascade arms
 arms), computes per-task Pareto dominance, and reports whether the combined arm moves the frontier.
 It did not: the central hypothesis is narrowed, with the Jev layer's recorded value kept in gating
 and reranking rather than selective OncoX triage.
+
+### A021-A025 — scientific nucleus, search evaluation, gap loop, control loop
+
+```powershell
+python -m oncodex run A021
+python -m oncodex run A022
+python -m oncodex run A023
+python -m oncodex run A024
+python -m oncodex run A025
+```
+
+A021 admits a measured result into ScientificEvidence and records a refused value-less measurement. A022 evaluates raw token-overlap capability search against a substring baseline and records it failing its frozen rule; A025 re-evaluates the repaired mechanism under a new identity. A023 exercises all four gap kinds, promotion gates, bounded activation, and the refusal of reasoning-only results. A024 proves a research step persists evidence or gaps independently of any agent session.
+
+### S001-S002 — first scientific investigations
+
+```powershell
+python -m oncodex run S001
+python -m oncodex run S002 --live
+```
+
+S001 failed against its frozen minimum-project threshold (33 TCGA projects retrieved, 40 required). S002 completed live through the nucleus and recorded the first admitted scientific measurement: assay co-availability across 33 TCGA projects shows no site association beyond the independence null (p=1.0), and the null is degenerate because every project carries both assays.
 
 ## Architecture experiment protocols
 

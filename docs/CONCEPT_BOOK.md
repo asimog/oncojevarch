@@ -122,6 +122,11 @@ OnCodex discovers capabilities from scientific needs, not from a fixed catalogue
 
 The architecture must be able to absorb scientific measurements that were not anticipated when the repository was created. Capability evolution is infrastructure around the three-tier model, not Tier 4.
 
+The current mechanism is deterministic token-overlap search over typed summaries; it was evaluated
+and repaired once by A022/A025 and is an initial mechanism, not established retrieval architecture.
+`CapabilityRecord` metadata supports discovery; it is not the typed scientific capability
+contract, which remains to be earned.
+
 ## 8. Evaluation ladder
 
 ```text
@@ -162,3 +167,12 @@ Durable architecture lessons from recorded results; none is a biological claim.
 18. the tested Jev-to-OncoX cascade did not establish savings (A012, negative);
 19. A020 did not demonstrate a combined-arm frontier shift on recorded tasks;
 20. negative results narrow architecture rather than cause arbitrary redesign.
+
+### Recorded additions (A021-A025, S001-S002)
+
+21. an admission gate must refuse absent values rather than zero them (A021);
+22. a mechanism that fails its own frozen rule is reopened; repairs need new identities (A022, A025);
+23. pinned mechanisms keep recorded results reproducible when production code changes (A022);
+24. gaps route correctly only when their kind is declared honestly (A023);
+25. session-independent state is a precondition for agent-driven research (A024);
+26. frozen thresholds must fit the real population; failures are recorded, not edited (S001, S002).

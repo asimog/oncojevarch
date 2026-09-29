@@ -4,8 +4,10 @@ import json
 from dataclasses import asdict
 from typing import Any
 
+from oncodex.research_loop import ResearchRuntime, run_research_step
 from oncolab.capabilities import CapabilityKind, CapabilityRegistry
 from oncolab.gaps import Gap, GapKind, GapLedger, gap_identity
+from research.ledger import InvestigationLedger, investigation_payload
 
 NO_APPLICABLE_CAPABILITY = (
     "no applicable capability found; record an explicit gap with record_gap instead of "
@@ -93,6 +95,53 @@ def record_gap_impl(
     return _dumps({"gap_id": gap.gap_id, "kind": gap.kind.value, "route": gap.route.value})
 
 
+def inspect_investigation_impl(
+    investigations: InvestigationLedger,
+    *,
+    investigation_id: str,
+) -> str:
+    """Read the latest persisted revision of an investigation."""
+
+    latest = investigations.latest(investigation_id)
+    if latest is None:
+        return f"not found: investigation {investigation_id}"
+    return _dumps(investigation_payload(latest))
+
+
+def run_scientific_operation_impl(
+    runtime: ResearchRuntime,
+    *,
+    investigation_id: str,
+    operation_id: str,
+) -> str:
+    """Execute one registered scientific operation, or expose an explicit gap."""
+
+    investigation = runtime.investigations.latest(investigation_id)
+    if investigation is None:
+        return f"not found: investigation {investigation_id}"
+    try:
+        operation = runtime.operations.get(operation_id)
+    except KeyError:
+        return f"not found: operation {operation_id}; search capabilities and record a gap"
+    step = run_research_step(
+        runtime=runtime,
+        investigation=investigation,
+        need=operation.context.measurement,
+        operation_id=operation_id,
+    )
+    return _dumps(
+        {
+            "outcome": step.outcome,
+            "investigation_id": step.investigation_id,
+            "evidence_id": step.evidence_id,
+            "gap_id": step.gap_id,
+            "refusal_reasons": list(step.refusal_reasons),
+            "search_candidates": list(step.search_candidates),
+            "next_action": step.revision.next_action,
+        }
+    )
+
+
 def build_capability_tools(
     *,
     registry: CapabilityRegistry,
@@ -160,4 +209,46 @@ def build_capability_tools(
         function_tool(name_override="search_capabilities")(search_capabilities),
         function_tool(name_override="load_capability")(load_capability),
         function_tool(name_override="record_gap")(record_gap),
+    ]
+
+
+def build_research_tools(
+    *,
+    runtime: ResearchRuntime,
+) -> list[Any]:
+    """Build Agents SDK tools for the session-independent research step.
+
+    The tools read and write durable state through the runtime's ledgers; agent threads are not
+    scientific memory.
+    """
+
+    try:
+        from agents import function_tool
+    except ImportError as exc:
+        raise RuntimeError("install the agents extra: pip install -e '.[agents]'") from exc
+
+    def inspect_investigation(investigation_id: str) -> str:
+        """Inspect the latest persisted revision of an investigation.
+
+        Args:
+            investigation_id: Investigation identifier.
+        """
+        return inspect_investigation_impl(runtime.investigations, investigation_id=investigation_id)
+
+    def run_scientific_operation(investigation_id: str, operation_id: str) -> str:
+        """Execute one registered scientific operation, or expose an explicit gap.
+
+        Args:
+            investigation_id: Investigation the step belongs to.
+            operation_id: Registered scientific operation to execute.
+        """
+        return run_scientific_operation_impl(
+            runtime,
+            investigation_id=investigation_id,
+            operation_id=operation_id,
+        )
+
+    return [
+        function_tool(name_override="inspect_investigation")(inspect_investigation),
+        function_tool(name_override="run_scientific_operation")(run_scientific_operation),
     ]

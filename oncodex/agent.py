@@ -2,12 +2,15 @@ from __future__ import annotations
 
 from typing import Any
 
-from oncodex.capability_tools import build_capability_tools
+from oncodex.capability_tools import build_capability_tools, build_research_tools
 from oncodex.codex_workspace import build_read_only_codex_tool
 from oncodex.config import Settings
 from oncodex.model_provider import build_agent_model
+from oncodex.research_loop import ResearchRuntime
 from oncolab.capabilities import CapabilityRegistry
 from oncolab.gaps import GapLedger
+from oncolab.operations import OperationRegistry
+from research.ledger import EvidenceLedger, InvestigationLedger
 from store.jsonl import AppendOnlyJsonlStore
 
 ONCODEX_INSTRUCTIONS = """You are OnCodex, the top autonomous research agent for this repository.
@@ -59,8 +62,18 @@ def build_oncodex_research_agent(
         if gap_ledger is not None
         else GapLedger(AppendOnlyJsonlStore(settings.repo_root / ".oncojev" / "gaps.jsonl"))
     )
+    store = resolved_ledger.store
+    runtime = ResearchRuntime(
+        registry=resolved_registry,
+        operations=OperationRegistry(),
+        executors={},
+        gaps=resolved_ledger,
+        investigations=InvestigationLedger(store),
+        evidence=EvidenceLedger(store),
+    )
     tools: list[Any] = [
         *build_capability_tools(registry=resolved_registry, ledger=resolved_ledger),
+        *build_research_tools(runtime=runtime),
         build_read_only_codex_tool(repo_root=settings.repo_root),
     ]
     kwargs: dict[str, Any] = {

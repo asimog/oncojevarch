@@ -1,77 +1,61 @@
 # Adaptive harness and capability search
 
-Status: COMPLETE
+Status: COMPLETE (superseded)
 Created: 2026-09-30
 Completed: 2026-09-30
 Base HEAD: `2ec39eb222c1fe9dc31314f689c9543be8e0c22c`
+Superseded by: `docs/tasks/README.md` (9 evidence-gated tasks) and
+`docs/exec-plans/completed/0002-evidence-gated-nine-task-program.md`
 
-Reviewed task definitions: `docs/tasks/` (one file per task, T00-T40).
-No commits were made; all changes are in the working tree per instruction.
+## What this plan was
 
-## Phase A — Documentation convergence (COMPLETE)
+The first implementation pass took a 41-task prompt literally and turned document sections into
+pseudo-independent tasks. An assessment found the decomposition wrong: one architectural change
+had produced 16 tasks, and several "COMPLETE" labels were stronger than the evidence. This record
+keeps the surviving decisions and honest status; the decorative 41-task files were deleted after
+extraction, per the assessment.
 
-- THESIS.md — recorded evidence to date; harness strategy is not a fourth arm.
-- ARCHITECTURE.md — adaptive scientific search, five search problems, repository mental model,
-  canonical adaptive flowchart (target vs implemented), expanded OnCodex/OncoLab roles, Codex
-  engineering-side boundary, source-independence path.
-- docs/CONCEPT_BOOK.md — five search problems, capability search synthesis, earned lessons
-  A001-A020.
-- docs/CAPABILITY_EVOLUTION.md — explicit routes for Method/Capability/Decision/Harness gaps and
-  the capability lifecycle diagram with the three invariant inequalities.
-- README.md — mission, scientific thesis, harness strategy, current phase, corrected non-goals,
-  repository map including docs/tasks; corrected stale experiment-status claims.
-- AGENTS.md — executable experiment list corrected to A001-A020; docs/tasks added to read-first.
-- SCAFFOLD_MANIFEST.md — stale test count corrected; superseded next-action block replaced.
-- docs/EVALUATION.md — executed level vs scientific readiness, L0-L4 entry/exit gates, L3
-  compatibility contract, L4 frozen-T1/shadow mode, accounting rules, controls, leakage review,
-  multiplicity modes, freezing/identity, fair A/B/C under capability evolution, open gaps.
+## What survived (still current)
 
-## Phase B — Code (COMPLETE)
+- THESIS/ARCHITECTURE separation of scientific thesis vs harness strategy; five search problems;
+  canonical adaptive flowchart; explicit rejection of fixed modality sequencing.
+- `CapabilityRecord` discovery metadata (purpose, inputs/outputs, prerequisites, exclusions,
+  evaluated_domain) and deterministic token-overlap search.
+- `Gap` provenance plus the append-only `GapLedger`; gap routing table.
+- `EvaluationLevel` wired into `ExperimentSpec`; catalog fingerprints of A001-A020 verified
+  byte-identical (20 entries) before/after.
+- Dead `ABCTestPlan`/`SystemArm`/`MetricRecord` deleted.
+- Architecture checks: `oncolab` dependency rule; `execution.gdc` containment; unit-tested
+  `forbid_import_directions(root)`; catalog level-contract tests.
+- CI installs `.[agents,jev,dev]`.
+- Canonical doc cleanup: README framing, AGENTS.md experiment line, SCAFFOLD_MANIFEST status note,
+  EVALUATION gates and contracts.
 
-- `oncolab/capabilities.py` — minimum contract fields (purpose, domain_owner, inputs, outputs,
-  prerequisites, exclusions, evaluated_domain), `CapabilitySummary`, deterministic bounded
-  `search`, `check_applicability`, explicit empty results. No Jev.
-- `oncolab/gaps.py` — provenance fields (`unmet_requirements`, `attempted`, `origin`) and
-  `GapLedger` append-only durable recording with deterministic `gap_identity`.
-- `oncodex/capability_tools.py` — pure tool functions + Agents SDK wrappers
-  (`search_capabilities`, `load_capability`, `record_gap`); no network, no global state.
-- `oncodex/agent.py` — `build_oncodex_research_agent`; A001 smoke builder untouched.
-- `oncolab/experiments.py` — `evaluation_level: EvaluationLevel`; catalog typed; catalog
-  fingerprints verified byte-identical before/after (20 entries).
-- `evaluation/models.py` — dead `ABCTestPlan`/`SystemArm`/`MetricRecord` deleted; `EvaluationLevel`
-  wired and tested.
-- `scripts/check_architecture.py` — `oncolab` dependency rule; source-adapter containment;
-  `forbid_import_directions(root)` unit-tested.
-- `.github/workflows/ci.yml` — installs `.[agents,jev,dev]`.
+## Where the labels were too strong (corrected by 0002)
 
-## Decisions and findings
+- `CapabilityRegistry.search()` is an initial experimental mechanism; A022 recorded it failing its
+  own frozen rule (a stopword false hit), A025 re-evaluated the repaired mechanism after a minimal
+  fix — a new identity, not an edit.
+- `CapabilityRecord.inputs/outputs` are discovery metadata, not typed scientific contracts.
+- The OnCodex research agent demonstrated capability-registry and research-step operations; it did
+  not demonstrate the full scientific control loop.
+- Evidence admission had no owner; now implemented and exercised (A021-A024, S002).
 
-- 2026-09-30: T33 resolved by deletion of dead evaluation contracts; keep and wire
-  `EvaluationLevel`.
-- 2026-09-30: T16 scoped to a separate research builder; Jev/OncoX agent invocation deferred
-  (no evaluated per-decision Jev capability exists).
-- 2026-09-30: No `ExperimentSpec` schema change; fingerprints of frozen A001-A020 records prove
-  unchanged.
-- 2026-09-30: T29 accounting rule was already protected by `tests/test_frontier.py`; docs updated,
-  no test-only seam added.
-- 2026-09-30: markdown scan of repo docs found no remaining broken fences (scratch copies under
-  `.oncojev/` are not repo docs).
+## Unique decisions extracted from the deleted T00-T40 files
 
-## Verification log
+- Baseline: HEAD `2ec39eb2...`, verify green (110 passed / 3 skipped at that time); failures since
+  are attributable to that program.
+- No `ExperimentSpec` schema changes; catalog fingerprints must stay byte-identical.
+- Executed experiment runners and specs are frozen records; new work lands in new modules.
+- T33 resolved by deletion; T16 scoped to a separate research builder with Jev/OncoX deferred.
+- T29 accounting rule already protected by `tests/test_frontier.py`; no test-only seam added.
+- T35: CI extras change unverified until the next push (no push performed in this program).
 
-- 2026-09-30 baseline: architecture OK; compileall OK; pytest 110 passed / 3 skipped; ruff OK;
-  mypy OK (108 files).
-- 2026-09-30 final (global Python, no optional SDKs): architecture checks OK; compileall OK;
-  pytest 130 passed / 4 skipped; ruff OK; mypy OK (113 files).
-- 2026-09-30 local venv (agents installed): new capability-tool wrapper tests executed and passed
-  (16/16 across test_capability_tools, test_capability_search, test_gap_ledger).
-- CI workflow updated but not executed (no push performed; no remote mutations).
+## Verification at close of this plan
 
-## Remaining gaps (also in docs/EVALUATION.md)
+architecture OK; compileall OK; 130 passed / 4 skipped; ruff OK; mypy OK (113 files).
 
-- no L3/L4 protocol, compatibility artifact, or temporal cutoffs frozen yet;
-- evidence admission (`MeasuredResult -> ScientificEvidence`) has no implemented owner;
-- no evaluated per-decision Jev instrument built since A013 (DecisionGap path untested live);
-- agent-side Jev/OncoX invocation deliberately unwired;
-- multiplicity mode declaration documented but not enforced by a catalog field;
-- CI extras change unverified until the next push.
+## Verification after 0002 (superseding)
+
+architecture OK; compileall OK; 153 passed / 4 skipped; ruff OK; mypy OK (131 files); live runs
+S001 (failed: frozen minimum) and S002 (completed: first admitted scientific evidence `ev-s002`).

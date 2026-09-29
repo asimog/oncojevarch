@@ -27,7 +27,15 @@ from experiments.architecture.a017_resumable_operations import run as run_a017
 from experiments.architecture.a018_bounded_change_proposal import run as run_a018
 from experiments.architecture.a019_masked_rediscovery import run as run_a019
 from experiments.architecture.a020_frontier import run as run_a020
+from experiments.architecture.a021_scientific_nucleus import run as run_a021
+from experiments.architecture.a022_capability_search_evaluation import run as run_a022
+from experiments.architecture.a023_gap_loop import run as run_a023
+from experiments.architecture.a024_research_control_loop import run as run_a024
+from experiments.architecture.a025_repaired_capability_search import run as run_a025
 from experiments.catalog import EXPERIMENTS, get_experiment
+from experiments.scientific.catalog import SCIENTIFIC_EXPERIMENTS
+from experiments.scientific.s001_public_metadata_association import run as run_s001
+from experiments.scientific.s002_public_metadata_association import run as run_s002
 from oncodex.config import Settings
 
 RUNNERS = {
@@ -51,7 +59,16 @@ RUNNERS = {
     "A018": run_a018,
     "A019": run_a019,
     "A020": run_a020,
+    "A021": run_a021,
+    "A022": run_a022,
+    "A023": run_a023,
+    "A024": run_a024,
+    "A025": run_a025,
+    "S001": run_s001,
+    "S002": run_s002,
 }
+
+ALL_EXPERIMENTS = EXPERIMENTS + SCIENTIFIC_EXPERIMENTS
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -60,7 +77,7 @@ def _parser() -> argparse.ArgumentParser:
     sub.add_parser("status")
     sub.add_parser("experiments")
     plan = sub.add_parser("plan")
-    plan.add_argument("experiment_id", choices=tuple(e.experiment_id for e in EXPERIMENTS))
+    plan.add_argument("experiment_id", choices=tuple(e.experiment_id for e in ALL_EXPERIMENTS))
     run = sub.add_parser("run")
     run.add_argument("experiment_id", choices=tuple(RUNNERS))
     run.add_argument("--live", action="store_true")
@@ -75,13 +92,13 @@ def _status(settings: Settings) -> int:
     print(f"agent_provider: {'openrouter' if settings.openrouter_api_key else 'openai/default'}")
     print(f"jev_model: {settings.jev_model or '(not configured)'}")
     print(f"typesafe_configured: {bool(settings.typesafe_api_key)}")
-    print("implemented experiments: A001-A020")
+    print("implemented experiments: A001-A025 and S001-S002")
     print("scientific claims: none")
     return 0
 
 
 def _list_experiments() -> int:
-    for spec in EXPERIMENTS:
+    for spec in ALL_EXPERIMENTS:
         marker = "implemented" if spec.experiment_id in RUNNERS else "catalog"
         print(f"{spec.experiment_id} [{spec.experiment_class.value}] {marker}: {spec.question}")
     return 0

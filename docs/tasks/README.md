@@ -1,93 +1,147 @@
-# Task program — adaptive harness and capability search
+# Evidence-gated program (9 tasks)
 
-Created: 2026-09-30. This folder is the working task record. It is not canonical
-architecture knowledge; canonical docs remain `THESIS.md`, `ARCHITECTURE.md`,
-`docs/CONCEPT_BOOK.md`, `docs/CAPABILITY_EVOLUTION.md`, `docs/EVALUATION.md`, and
-`docs/EXPERIMENT_CATALOG.md`.
+Status: COMPLETE through the evidence boundary; Tasks 6-9 have recorded gated outcomes, not silent
+completions.
+Created: 2026-09-30
+Base commit: `711824f`
+Execution record: `docs/exec-plans/completed/0002-evidence-gated-nine-task-program.md`
 
-Execution record: `docs/exec-plans/active/0001-adaptive-harness-capability-search.md`.
+These nine tasks replace the former 41-file task program. Each task proves a capability or
+resolves a question; none specifies files to edit. Every task states its evidence gate: a task may
+only proceed when the previous task's outcome justifies it. Gated tasks that were not triggered
+are recorded as such with the exact trigger that would open them.
 
-## Baseline (T00)
+---
 
-- Starting HEAD: `2ec39eb222c1fe9dc31314f689c9543be8e0c22c` ("Record A019 and A020 execution plans").
-- Working tree at start: four modified docs from the prior evaluation-strategy session
-  (`README.md`, `docs/CONCEPT_BOOK.md`, `docs/EVALUATION.md`, `docs/EXPERIMENT_CATALOG.md`).
-- Baseline verification: architecture checks OK; compileall OK; pytest 110 passed / 3 skipped;
-  ruff OK; mypy OK (108 source files).
-- No code changed before this record.
+## Task 1 — Establish the executable scientific nucleus
 
-## Independent review of the incoming plan
+**Status: COMPLETE.**
+Goal: one investigation progresses question → required operation → measured result → admitted
+ScientificEvidence → revised investigation, without Jev or OncoX.
+Depends on: nothing.
+Evidence gate: none; this is the base of the chain.
+Implemented: `oncolab/admission.py` (deterministic admission gate: method identity, matching
+population, provenance, present measurement; `None` is refused, never zeroed),
+`research/state.py` (monotonic investigation revision), `research/ledger.py` (append-only
+investigation and evidence ledgers), `oncolab/operations.py` (operation registry and admission
+context disclosure protocol).
+Acceptance met: A021 recorded positive admission, a refused value-less measurement, two persisted
+revisions, and a persisted evidence record; `tests/test_admission.py` covers refusal reasons.
+Not yet earned: typed capability output contracts; admission context is assembled by deterministic
+caller code.
 
-The 40-task plan is directionally consistent with the repository, but it was written from an
-assumed state that differs from the actual state. Adjustments made:
+## Task 2 — Prove capability search is actually needed
 
-1. **T1 shape changed** (user instruction): per-task files here plus one active execution plan,
-   instead of a single monolithic plan only.
-2. **Already-satisfied tasks** are marked so: T0 complete; T35 currently green; T39 partially
-   done in the prior session; T33 partially (dead contract confirmed by code audit).
-3. **Fingerprint safety rule**: `ExperimentSpec` is fingerprinted and A001-A020 results are frozen
-   records. No new spec fields are added. `evaluation_level` is wired to `EvaluationLevel` only as
-   a value-preserving annotation change, verified by comparing catalog fingerprints before/after.
-4. **Executed experiments are immutable records**: A001-A020 runners and specs are not materially
-   edited. New code goes into new modules/tests; T16 adds a research agent builder that leaves the
-   A001 smoke agent unchanged.
-5. **No speculative machinery**: the capability layer gets the smallest search/contract/ledger
-   additions that satisfy T6-T8; no service, no store schema, no Jev in capability search.
-6. **Evidence admission stays an explicit remaining gap** unless the next milestone requires it;
-   the constitution forbids improvising it. T40 answers it honestly.
-7. **T5 diagram** is published as target architecture with the implemented subset stated; it must
-   not imply that unimplemented components (admission, OncoX wiring) already exist.
-8. **T33 resolved by deletion**: `ABCTestPlan`, `SystemArm`, `MetricRecord` are unreferenced;
-   `EvaluationLevel` survives by being wired. Dead contracts are removed, not preserved.
-9. **T34 stays small**: two dependency-direction rules plus one catalog level-contract test; no
-   bespoke static-analysis system.
-10. **T36 defines, does not start, the next scientific milestone**; starting it is a separate
-    decision with its own experiment identity.
+**Status: COMPLETE (negative result recorded, minimal repair re-evaluated under a new identity).**
+Goal: decide whether the lexical search mechanism is justified against simpler retrieval, without
+assuming expansion is needed.
+Depends on: Task 1 (admission identity for recording).
+Evidence gate: a frozen need set and a decision rule recorded before result exposure.
+Outcome: A022 froze six capabilities, eight needs (six matchable, two absent), a substring
+baseline, and the rule "retain only if top-1 accuracy ≥ baseline and every absent need is detected
+without a false hit". Raw token overlap scored 6/6 top-1 but returned one false hit
+("call structural variants in a tumor normal pair" matched on stopwords), so A022 recorded
+**reopen capability retrieval**. The minimal repair (stopword filtering in `_tokens`) was then
+evaluated by A025 on the same frozen needs: 6/6 top-1, 2/2 misses detected, 0 false hits,
+decision **keep the repaired deterministic search as the initial mechanism**.
+Not earned: semantic retrieval; registry-scale evidence; the mechanism remains an initial
+mechanism, not established retrieval architecture.
 
-Everything else is kept as written, with acceptance criteria tied to `python scripts/verify.py`.
+## Task 3 — Prove the gap loop
 
-## Reviewed task set
+**Status: COMPLETE.**
+Goal: when no capability exists, the system produces the correct typed gap and route without
+improvising science.
+Depends on: Tasks 1-2.
+Evidence gate: none beyond the frozen scenarios.
+Outcome: A023 recorded all four gap kinds with provenance (Method→scientific research,
+Capability→engineering, Decision→Jev design/eval, Harness→harness engineering); blocked two unsafe
+promotions (skip-step promotion, scientific readiness before engineering verification); activated
+the fixture capability only after bounded promotion and admitted its measurement; refused a
+reasoning-only result lacking provenance at admission (`missing_provenance`).
+Not earned: gap classification is caller-declared; routing under ambiguous real needs is untested.
 
-| Task | File | Verdict | Status |
-|---|---|---|---|
-| T00 | [T00-baseline.md](T00-baseline.md) | KEEP | COMPLETE |
-| T01 | [T01-execution-plan.md](T01-execution-plan.md) | MODIFIED (per-task files + one active plan) | COMPLETE |
-| T02 | [T02-thesis.md](T02-thesis.md) | KEEP | COMPLETE |
-| T03 | [T03-architecture-search.md](T03-architecture-search.md) | KEEP | COMPLETE |
-| T04 | [T04-five-search-problems.md](T04-five-search-problems.md) | KEEP | COMPLETE |
-| T05 | [T05-flowchart.md](T05-flowchart.md) | MODIFIED (label target vs implemented) | COMPLETE |
-| T06 | [T06-capability-search.md](T06-capability-search.md) | KEEP (deterministic only) | COMPLETE |
-| T07 | [T07-capability-contract.md](T07-capability-contract.md) | MODIFIED (minimum fields) | COMPLETE |
-| T08 | [T08-gap-explicit.md](T08-gap-explicit.md) | MODIFIED (provenance + ledger) | COMPLETE |
-| T09 | [T09-method-gap.md](T09-method-gap.md) | KEEP | COMPLETE |
-| T10 | [T10-capability-gap.md](T10-capability-gap.md) | KEEP | COMPLETE |
-| T11 | [T11-decision-gap.md](T11-decision-gap.md) | KEEP | COMPLETE |
-| T12 | [T12-harness-gap.md](T12-harness-gap.md) | KEEP | COMPLETE |
-| T13 | [T13-lifecycle.md](T13-lifecycle.md) | KEEP | COMPLETE |
-| T14 | [T14-oncodex.md](T14-oncodex.md) | KEEP | COMPLETE |
-| T15 | [T15-oncolab.md](T15-oncolab.md) | KEEP | COMPLETE |
-| T16 | [T16-orchestration.md](T16-orchestration.md) | MODIFIED (research builder; pure tools) | COMPLETE |
-| T17 | [T17-codex-boundary.md](T17-codex-boundary.md) | KEEP | COMPLETE |
-| T18 | [T18-source-independence.md](T18-source-independence.md) | KEEP | COMPLETE |
-| T19 | [T19-type-erosion.md](T19-type-erosion.md) | MODIFIED (minimal fixes + inventory) | COMPLETE |
-| T20 | [T20-concept-book.md](T20-concept-book.md) | KEEP | COMPLETE |
-| T21 | [T21-readme.md](T21-readme.md) | KEEP | COMPLETE |
-| T22 | [T22-lessons.md](T22-lessons.md) | KEEP | COMPLETE |
-| T23 | [T23-levels.md](T23-levels.md) | KEEP | COMPLETE |
-| T24 | [T24-l0.md](T24-l0.md) | KEEP | COMPLETE |
-| T25 | [T25-l1.md](T25-l1.md) | KEEP | COMPLETE |
-| T26 | [T26-l2.md](T26-l2.md) | KEEP | COMPLETE |
-| T27 | [T27-l3.md](T27-l3.md) | KEEP | COMPLETE |
-| T28 | [T28-l4.md](T28-l4.md) | KEEP | COMPLETE |
-| T29 | [T29-abc-accounting.md](T29-abc-accounting.md) | MODIFIED (verify existing test; docs) | COMPLETE |
-| T30 | [T30-controls-leakage.md](T30-controls-leakage.md) | KEEP | COMPLETE |
-| T31 | [T31-multiplicity.md](T31-multiplicity.md) | KEEP (docs; no spec schema change) | COMPLETE |
-| T32 | [T32-identity.md](T32-identity.md) | KEEP (docs; no spec schema change) | COMPLETE |
-| T33 | [T33-abctestplan.md](T33-abctestplan.md) | MODIFIED (delete dead contracts; wire enum) | COMPLETE |
-| T34 | [T34-checks.md](T34-checks.md) | MODIFIED (two import rules + level test) | COMPLETE |
-| T35 | [T35-verification.md](T35-verification.md) | MODIFIED (extras in CI) | COMPLETE |
-| T36 | [T36-milestone.md](T36-milestone.md) | MODIFIED (define, do not start) | COMPLETE |
-| T37 | [T37-fair-abc.md](T37-fair-abc.md) | KEEP | COMPLETE |
-| T38 | [T38-mental-model.md](T38-mental-model.md) | KEEP | COMPLETE |
-| T39 | [T39-cleanup.md](T39-cleanup.md) | KEEP | COMPLETE |
-| T40 | [T40-final-audit.md](T40-final-audit.md) | KEEP | COMPLETE |
+## Task 4 — Build the minimum OnCodex scientific control loop
+
+**Status: COMPLETE for the step; need-identification remains agent reasoning (target).**
+Goal: OnCodex can inspect an investigation, search capabilities, execute one allowed operation or
+expose a gap, and persist the result independently of its session.
+Depends on: Tasks 1-3.
+Evidence gate: the step must use only admitted evidence and durable ledgers.
+Implemented: `oncodex/research_loop.py` (`run_research_step`, `ResearchRuntime`,
+`unmet_activation_requirements`), tools `inspect_investigation` and `run_scientific_operation`
+added to `build_oncodex_research_agent` (A001 smoke agent untouched).
+Outcome: A024 executed an evidence step and a gap step; rebuilding every ledger from the same
+store reproduced evidence, gap, and the revised investigation (`session_independent: true`).
+Not demonstrated: identifying the next information need from scientific state — the step takes the
+need as input; that remains agent reasoning and is the first thing to demonstrate live.
+
+## Task 5 — Run the first capability-neutral scientific investigation
+
+**Status: COMPLETE (one failed identity, one completed identity with honest null result).**
+Goal: freeze a scientific question and let the investigation determine required information,
+capabilities, and outcomes — including a recorded gap as a successful harness outcome.
+Depends on: Tasks 1-4.
+Evidence gate: real data through the nucleus; no modality is prescribed.
+Question (frozen): are RNA-Seq and WXS co-availability patterns across GDC TCGA projects
+associated with primary site beyond an independence null?
+Outcome: S001 (frozen minimum 40 projects) **failed live** after retrieving 33 TCGA projects —
+the frozen threshold was wrong, recorded as a failure rather than edited. S002 (new identity,
+minimum 30, `predecessor: S001`) **completed live**: 33/33 projects co-available, max site share
+0.0909 equal to the null mean, p=1.0; the first admitted scientific evidence is `ev-s002`.
+The degenerate null (no variance in co-availability) is the substantive finding: this question on
+this source cannot discriminate yet.
+Not earned: a disease-biology claim; this is public-metadata structure.
+
+## Task 6 — Introduce Jev only through a real DecisionGap
+
+**Status: EVALUATED — NOT TRIGGERED; Jev stays unwired.**
+Goal: add Jev only if an investigation exposes a bounded semantic distinction that deterministic
+science cannot answer conveniently and that matters to policy.
+Depends on: Task 5.
+Evidence gate (trigger): a recorded DecisionGap from a live investigation, with projection and
+evaluation plan.
+Outcome: S002's measurement and its interpretation are fully deterministic; no DecisionGap was
+exposed. Adding Jev now would specify the answer instead of discovering the need. Trigger
+condition recorded: any future investigation where a recorded policy decision cannot be expressed
+as a deterministic rule must open a DecisionGap before a Jev capability is built.
+
+## Task 7 — Introduce OncoX only when explanation search is justified
+
+**Status: EVALUATED — NOT TRIGGERED; OncoX stays unwired.**
+Goal: wire open-ended explanation/hypothesis reasoning into the research loop only when evidence
+warrants it.
+Depends on: Task 5 (and Task 6 if triggered).
+Evidence gate (trigger): recorded evidence whose interpretation needs alternatives, hypotheses, or
+discriminating experiments that deterministic analysis cannot supply.
+Outcome: the S002 null is explained by assay-design invariance (all projects have both assays); no
+open-ended explanation need was exposed. Trigger condition recorded: any investigation whose
+recorded evidence leaves competing explanations that deterministic checks cannot separate.
+
+## Task 8 — Run scientific A/B/C
+
+**Status: DEFERRED BY DESIGN DEPENDENCY (not a hidden blocker).**
+Goal: with one real scientific task and capability set frozen, compare A deterministic vs
+B +OncoX vs C +Jev+OncoX on the same population, data access, capabilities, and accounting.
+Depends on: Tasks 5-7.
+Evidence gate: arms B and C must contain evidence-backed components; a mature comparison holds
+the validated capability set constant (see EVALUATION.md).
+Dependency: Tasks 6 and 7 were not triggered, so B and C have no components to differ by; running
+A/B/C now would compare identical arms. The recorded-results A/B/C machinery from A020 remains
+available for tasks where B and C differ. Trigger condition: any frozen investigation with an
+evidence-backed DecisionGap (C) or explanation need (B); the comparison then runs under the
+existing equal-budget/equal-target and resource-accounting rules.
+
+## Task 9 — Graduate evaluation (L3, then L4) only when earned
+
+**Status: NOT EARNED — no protocol created.**
+Goal: independent compatibility validation (L3) followed by temporal/prospective evaluation (L4)
+for candidates that survive L2.
+Depends on: Task 8.
+Evidence gate: an L2 result with a candidate/prediction worth validating independently; a declared
+compatibility contract; then versioned T1/T2 cutoffs.
+Outcome: S002 is an exploratory measurement with no candidate or prediction, so there is nothing
+to validate independently; creating an L3/L4 protocol now would be protocol creation without an
+object. Trigger condition: the first L2 investigation that records a reproducible
+candidate/prediction — that experiment's follow-up must become the L3 protocol with an explicit
+compatibility contract, and its temporal version the L4 protocol with versioned cutoffs.

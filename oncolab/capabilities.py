@@ -69,10 +69,33 @@ class ApplicabilityCheck:
 
 
 _TOKEN = re.compile(r"[a-z0-9]+")
+_STOPWORDS = frozenset(
+    {
+        "a",
+        "across",
+        "an",
+        "and",
+        "at",
+        "between",
+        "by",
+        "for",
+        "from",
+        "in",
+        "of",
+        "on",
+        "over",
+        "per",
+        "the",
+        "to",
+        "with",
+    }
+)
 
 
 def _tokens(text: str) -> frozenset[str]:
-    return frozenset(_TOKEN.findall(text.lower()))
+    return frozenset(
+        token for token in _TOKEN.findall(text.lower()) if token not in _STOPWORDS
+    )
 
 
 def _summary(record: CapabilityRecord) -> CapabilitySummary:

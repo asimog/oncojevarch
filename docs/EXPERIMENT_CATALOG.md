@@ -38,7 +38,7 @@ gates, compatibility, controls, and resource-accounting rules.
 
 ## Scientific experiments
 
-None are implemented in the scaffold. A scientific experiment must freeze its scientific question, population, source/version, method/estimand, variables/comparisons, missingness/normalization/multiplicity policy where applicable, success/failure/stop rules, budget, and capability versions before material results are exposed.
+Scientific experiments live in `experiments/scientific/catalog.py`; S001 and S002 are the first implemented ones. A scientific experiment must freeze its scientific question, population, source/version, method/estimand, variables/comparisons, missingness/normalization/multiplicity policy where applicable, success/failure/stop rules, budget, and capability versions before material results are exposed.
 
 ## Experiment record template
 

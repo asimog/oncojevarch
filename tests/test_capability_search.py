@@ -82,6 +82,12 @@ def test_search_miss_and_invalid_inputs_are_explicit() -> None:
         registry.search("metadata", limit=0)
 
 
+def test_common_words_do_not_create_false_hits() -> None:
+    registry = _registry()
+
+    assert registry.search("call the thing in a pair from a site") == ()
+
+
 def test_an_unanticipated_capability_registers_without_core_changes() -> None:
     registry = CapabilityRegistry()
     registry.register(

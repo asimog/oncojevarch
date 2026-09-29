@@ -412,6 +412,107 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
             "token and call costs are reported for every arm without claiming monetary cost",
         ),
     ),
+    _a(
+        21,
+        "Can a measured result become admitted ScientificEvidence and revise an investigation?",
+        "A deterministic admission gate plus a durable investigation ledger creates the "
+        "executable scientific nucleus without Jev or OncoX.",
+        ("frozen measurement fixture", "admission contract", "investigation ledger"),
+        ("execution capability", "admission gate", "investigation ledger"),
+        ("direct admission", "refused admission for a value-less measurement"),
+        ("admitted evidence", "refusal reasons", "revision count", "replay stability"),
+        ("an absent measurement is admitted as a value", "evidence does not survive the store"),
+        ("advance to capability-search evaluation or fix the admission boundary",),
+        executable=True,
+        success=(
+            "the admitted result becomes ScientificEvidence with explicit population, coverage, "
+            "and missingness",
+            "the value-less measurement is refused and never becomes evidence",
+            "the investigation revision is persisted and readable from the append-only store",
+        ),
+    ),
+    _a(
+        22,
+        "Is the lexical capability search mechanism justified against simpler retrieval?",
+        "Deterministic token search is retained only if it beats a substring baseline and keeps "
+        "misses explicit on a frozen need set.",
+        ("frozen capability registry", "frozen need set"),
+        ("capability registry", "deterministic search", "substring baseline"),
+        ("token-overlap search", "substring matching"),
+        (
+            "top-1 retrieval accuracy",
+            "miss detection",
+            "false hits",
+            "frozen decision rule",
+        ),
+        ("token search is worse than the baseline or invents hits for absent capabilities",),
+        ("keep the initial search mechanism or reopen capability retrieval",),
+        executable=True,
+        success=(
+            "the decision is computed against the frozen rule recorded before the run",
+            "absent-capability needs return empty results in both arms",
+            "limitations state that the registry is tiny and semantic retrieval is not evaluated",
+        ),
+    ),
+    _a(
+        23,
+        "Does a capability absence become a correctly routed typed gap without improvisation?",
+        "All four gap kinds route to their owning process, promotion stays gated, and reasoning "
+        "cannot enter the evidence path.",
+        ("frozen gap scenarios", "capability registry", "promotion gates"),
+        ("gap ledger", "routing table", "promotion gates", "admission gate"),
+        ("recorded gaps and routes", "blocked unsafe promotions", "bounded activation"),
+        (
+            "routes correct",
+            "unsafe promotions blocked",
+            "reasoning refusals",
+            "activation admissions",
+        ),
+        ("a gap routes to the wrong owner or a generated capability activates itself",),
+        ("trust the gap loop or repair classification and promotion",),
+        executable=True,
+        success=(
+            "all four gap kinds are recorded with provenance and routed to their owning process",
+            "an unverified or scientifically experimental capability cannot be activated",
+            "a reasoning-only result without provenance is refused at admission",
+        ),
+    ),
+    _a(
+        24,
+        "Can one research step persist evidence or a gap independently of any agent session?",
+        "Executing or gapping through the research step leaves fully durable state "
+        "reconstructible from the append-only store.",
+        ("frozen measurement fixture", "append-only store"),
+        ("capability registry", "research step", "evidence ledger", "investigation ledger"),
+        ("step with an activated capability", "step with a missing capability"),
+        ("step outcomes", "persisted evidence", "persisted gap", "session independence"),
+        ("state depends on the session or a step outcome is not persisted",),
+        ("use the step as the control loop for the first scientific investigation",),
+        executable=True,
+        success=(
+            "the evidence step admits and persists evidence plus the revised investigation",
+            "the gap step persists a routed gap and the investigation's next action",
+            "fresh ledgers over the same store reproduce the state after session loss",
+        ),
+    ),
+    _a(
+        25,
+        "Does the repaired capability search meet the rule that A022 failed?",
+        "Stopword filtering removes the false hit that reopened retrieval, and the repaired "
+        "search detects absent capabilities without inventing hits.",
+        ("the frozen A022 need set and registry", "repaired tokenizer"),
+        ("capability registry", "repaired deterministic search"),
+        ("repaired token-overlap search", "substring baseline"),
+        ("top-1 retrieval accuracy", "miss detection", "false hits", "frozen decision rule"),
+        ("the repaired search still invents a hit for an absent capability",),
+        ("retain the repaired search until registry scale or need ambiguity justifies reopening",),
+        executable=True,
+        success=(
+            "the repaired search meets the frozen rule that A022 recorded as failed",
+            "the recorded A022 negative result remains unchanged",
+            "limitations still state that semantic retrieval is not justified by this evidence",
+        ),
+    ),
 )
 
 
