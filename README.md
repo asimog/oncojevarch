@@ -363,6 +363,17 @@ python -m oncodex run A027
 
 A026 runs three independent runtimes - A deterministic, B plus OncoX, C plus Jev plus OncoX - inside controlled sandboxes with declared call budgets and an append-only action journal. Offline arms use deterministic doubles; live arms drive real Agents SDK sessions with live OncoX (deepseek) and live Jev (jev-1.13.0) calls. A027 proves a capability absence becomes a routed gap that closes only through governed promotion and activation, while a MethodGap routes to scientific research and is never implemented directly.
 
+### A028, S003-S004 — automated evolution, L3 compatibility, L4 shadow
+
+```powershell
+python -m oncodex run A028
+python -m oncodex run S003 --live
+python -m oncodex run S004 --live
+python -m oncodex boot oncox --prompt "interpret the recorded state"
+```
+
+A028 proves verification-gated capability evolution without self-promotion. S003 is the L3 compatibility validation: the GDC raw layer is reproduced on the GDAN/GDAC analysis layer published through GDC (1.0000 vs 1.0000 within the frozen tolerance), driven through arm A/C runtimes. S004 freezes an L4 T1 prediction with explicit cutoffs and evaluates T2 only after the due time. `oncodex boot` launches the independent OnCodeX, OncoX, and OnCoLab agents; the OnCodeX controller composes them through the Agents SDK.
+
 ### S001-S002 — first scientific investigations
 
 ```powershell

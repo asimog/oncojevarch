@@ -49,3 +49,4 @@ class JevDecision:
     model_id: str
     answers: tuple[JevAnswer, ...]
     usage: dict[str, Any] = field(default_factory=dict)
+    raw: dict[str, Any] = field(default_factory=dict)

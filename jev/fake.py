@@ -39,4 +39,5 @@ class FakeJevClient:
             projection_fingerprint=projection.fingerprint,
             model_id="fake-test-double",
             answers=tuple(built),
+            raw={"test_double": True},
         )

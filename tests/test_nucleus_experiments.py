@@ -8,6 +8,7 @@ from experiments.architecture.a024_research_control_loop import run as run_a024
 from experiments.architecture.a025_repaired_capability_search import run as run_a025
 from experiments.architecture.a026_abc_agent_runtimes import run as run_a026
 from experiments.architecture.a027_gap_evolution import run as run_a027
+from experiments.architecture.a028_automated_evolution import run as run_a028
 from oncodex.config import Settings
 
 
@@ -100,6 +101,17 @@ def test_gap_closes_only_after_governed_evolution(tmp_path: Path) -> None:
     assert measurements["gap_closed"] is True
     assert measurements["method_gap_route"] == "scientific_research"
     assert measurements["method_gap_implemented"] is False
+
+
+def test_automated_evolution_respects_gates(tmp_path: Path) -> None:
+    payload = json.loads(run_a028(settings=_settings(tmp_path)))
+
+    measurements = payload["measurements"]
+    assert measurements["after_failed_verification"] == "draft"
+    assert measurements["after_passed_verification"] == "promoted"
+    assert measurements["scientific_readiness"] == "validated_for_defined_domain"
+    assert measurements["method_gap_refused"] is True
+    assert measurements["unsafe_promotions"] == 0
 
 
 def test_control_loop_is_session_independent(tmp_path: Path) -> None:

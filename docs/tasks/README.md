@@ -1,7 +1,9 @@
 # Evidence-gated program (9 tasks)
 
-Status: Tasks 1-5 complete; Tasks 6-7 wired and live-verified at the runtime level; Tasks 8-9
-remain gated. See `docs/exec-plans/completed/0003-abc-agent-runtimes.md` for the latest evidence.
+Status: Tasks 1-5 complete; Tasks 6-7 wired and live-verified at the runtime level; Task 8's
+arm runtimes executed a real-data scientific experiment (S003) through arms A and C; Task 9
+executed L3 (compatible reproduction on the GDAN analysis layer) and froze the L4 T1 shadow with
+an automated T2 checker. See `docs/exec-plans/completed/0004-l3-l4-evolution-boots.md`.
 Created: 2026-09-30
 Base commit: `711824f`
 Execution record: `docs/exec-plans/completed/0002-evidence-gated-nine-task-program.md`

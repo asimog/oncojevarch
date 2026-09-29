@@ -204,6 +204,11 @@ class AgentsOncoXReasoner:
                 errors.append(f"{type(exc).__name__}: {exc}")
                 continue
             latency_ms = (perf_counter() - started) * 1000
+            raw_source = result.final_output
+            if hasattr(raw_source, "model_dump_json"):
+                raw_output = raw_source.model_dump_json()
+            else:
+                raw_output = str(raw_source)
             return ReasoningResult(
                 output=to_reasoning_output(result.final_output),
                 model_id=self.model_id,
@@ -211,6 +216,7 @@ class AgentsOncoXReasoner:
                 latency_ms=latency_ms,
                 attempts=attempt,
                 errors=tuple(errors),
+                raw_output=raw_output,
             )
         raise RuntimeError(
             f"OncoX failed after {self.max_attempts} attempts: {'; '.join(errors)}"

@@ -108,6 +108,8 @@ def test_s001_spec_is_complete_and_scientific() -> None:
     assert [experiment.experiment_id for experiment in SCIENTIFIC_EXPERIMENTS] == [
         "S001",
         "S002",
+        "S003",
+        "S004",
     ]
     assert all(
         experiment.experiment_class is ExperimentClass.SCIENTIFIC
@@ -125,3 +127,23 @@ def test_s002_preflight_records_the_corrected_minimum(tmp_path: Path) -> None:
     assert payload["status"] == "frozen"
     assert measurements["predecessor"] == "S001"
     assert measurements["min_projects"] == 30
+
+
+def test_s003_preflight_freezes_the_compatibility_contract(tmp_path: Path) -> None:
+    from experiments.scientific.s003_compatibility_validation import run as run_s003
+
+    payload = json.loads(run_s003(settings=_settings(tmp_path)))
+
+    contract = payload["measurements"]["compatibility_contract"]
+    assert payload["status"] == "frozen"
+    assert contract["contract_id"] == "s003-gdc-raw-vs-gdan-analysis-layer"
+    assert contract["reference_value"] == 1.0
+
+
+def test_s004_preflight_awaits_the_t1_freeze(tmp_path: Path) -> None:
+    from experiments.scientific.s004_temporal_shadow import run as run_s004
+
+    payload = json.loads(run_s004(settings=_settings(tmp_path)))
+
+    assert payload["status"] == "frozen"
+    assert "co-availability rate stays" in payload["measurements"]["prediction"]

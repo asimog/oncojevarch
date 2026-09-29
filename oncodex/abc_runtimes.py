@@ -51,28 +51,32 @@ class BudgetExceeded(RuntimeError):
 
 @dataclass(slots=True)
 class CallBudget:
+    """Call accounting. Enforcement is opt-in: testing phases record but do not block."""
+
     max_jev_calls: int = 0
     max_oncox_calls: int = 0
     jev_calls: int = 0
     oncox_calls: int = 0
+    enforce: bool = False
 
     def spend_jev(self) -> None:
-        if self.jev_calls + 1 > self.max_jev_calls:
+        if self.enforce and self.jev_calls + 1 > self.max_jev_calls:
             raise BudgetExceeded("Jev call budget exceeded")
         self.jev_calls += 1
 
     def spend_oncox(self) -> None:
-        if self.oncox_calls + 1 > self.max_oncox_calls:
+        if self.enforce and self.oncox_calls + 1 > self.max_oncox_calls:
             raise BudgetExceeded("OncoX call budget exceeded")
         self.oncox_calls += 1
 
     @property
-    def account(self) -> dict[str, int]:
+    def account(self) -> dict[str, int | bool]:
         return {
             "jev_calls": self.jev_calls,
             "oncox_calls": self.oncox_calls,
             "max_jev_calls": self.max_jev_calls,
             "max_oncox_calls": self.max_oncox_calls,
+            "enforced": self.enforce,
         }
 
 
@@ -89,7 +93,7 @@ class ArmRunRecord:
     gap_id: str
     oncox_record: dict[str, Any] | None
     jev_record: dict[str, Any] | None
-    budget: dict[str, int]
+    budget: dict[str, Any]
     sandbox_actions: tuple[str, ...]
 
 
@@ -206,8 +210,12 @@ def execute_arm_program(
             "interpretation": result.output.interpretation,
             "hypotheses": list(result.output.hypotheses),
             "proposed_tests": list(result.output.proposed_tests),
+            "alternative_explanations": list(result.output.alternative_explanations),
+            "unresolved_uncertainty": list(result.output.unresolved_uncertainty),
+            "raw_output": result.raw_output,
             "usage": result.usage,
             "latency_ms": result.latency_ms,
+            "attempts": result.attempts,
             "creates_evidence": False,
         }
         journal.record("oncox_reasoning", {"arm": arm.value, "model_id": result.model_id})
@@ -232,6 +240,7 @@ def execute_arm_program(
             "answers": [asdict(answer) for answer in decision.answers],
             "value": answer_value,
             "policy": pursuit_policy(answer_value),
+            "raw": decision.raw,
             "creates_evidence": False,
         }
         journal.record("jev_judgment", {"arm": arm.value, "model_id": decision.model_id})
@@ -261,6 +270,7 @@ def build_arm_agent(
     jev_client: JevClient | None = None,
     budget: CallBudget | None = None,
     model: Any | None = None,
+    extra_tools: tuple[Any, ...] = (),
 ) -> Any:
     """Build the Agents SDK agent for one arm with a bounded, sandboxed tool surface."""
 
@@ -306,6 +316,7 @@ def build_arm_agent(
                     "model_id": result.model_id,
                     "interpretation": result.output.interpretation,
                     "hypotheses": list(result.output.hypotheses),
+                    "raw_output": result.raw_output,
                     "creates_evidence": False,
                 },
                 sort_keys=True,
@@ -343,6 +354,7 @@ def build_arm_agent(
                     "projection_fingerprint": decision.projection_fingerprint,
                     "answers": [asdict(answer) for answer in decision.answers],
                     "policy": pursuit_policy(answer_value),
+                    "raw": decision.raw,
                     "creates_evidence": False,
                 },
                 sort_keys=True,
@@ -354,7 +366,7 @@ def build_arm_agent(
     agent_kwargs: dict[str, Any] = {
         "name": f"OnCodex-{arm.value}",
         "instructions": ABC_INSTRUCTIONS,
-        "tools": tools,
+        "tools": [*tools, *extra_tools],
     }
     if model is not None:
         agent_kwargs["model"] = model

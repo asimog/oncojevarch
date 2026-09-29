@@ -89,6 +89,10 @@ class TypeSafeJevClient:
             "input_tokens": getattr(response.usage, "input_tokens", None),
             "output_tokens": getattr(response.usage, "output_tokens", None),
         }
+        if hasattr(response, "model_dump"):
+            raw: dict[str, Any] = dict(response.model_dump())
+        else:
+            raw = {"repr": str(response)}
         return JevDecision(
             capability_id=capability.capability_id,
             capability_version=capability.version,
@@ -96,4 +100,5 @@ class TypeSafeJevClient:
             model_id=self.model,
             answers=tuple(answers),
             usage=usage,
+            raw=raw,
         )

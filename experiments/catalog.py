@@ -567,6 +567,24 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
             "the MethodGap routes to scientific research and is not implemented",
         ),
     ),
+    _a(
+        28,
+        "Can a recorded gap drive bounded capability evolution without self-promotion?",
+        "A recorded capability gap produces a bounded engineering plan; verification gates "
+        "advancement one step at a time, and MethodGaps are refused by engineering.",
+        ("frozen gap scenarios", "capability registry", "verification evidence"),
+        ("evolution planner", "verification gate", "readiness gates"),
+        ("failed verification", "passed verification", "method-gap refusal"),
+        ("readiness transitions", "refusals", "unsafe promotions", "scientific evaluation"),
+        ("a capability advances without verification", "a MethodGap reaches engineering"),
+        ("use automated evolution for real capability gaps or repair the planner",),
+        executable=True,
+        success=(
+            "failed verification leaves the planned capability unverified",
+            "passed verification advances to verified and a declared evaluation promotes it",
+            "the MethodGap is refused by the planner",
+        ),
+    ),
 )
 
 

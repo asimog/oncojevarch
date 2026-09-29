@@ -34,11 +34,16 @@ from experiments.architecture.a024_research_control_loop import run as run_a024
 from experiments.architecture.a025_repaired_capability_search import run as run_a025
 from experiments.architecture.a026_abc_agent_runtimes import run as run_a026
 from experiments.architecture.a027_gap_evolution import run as run_a027
+from experiments.architecture.a028_automated_evolution import run as run_a028
 from experiments.catalog import EXPERIMENTS, get_experiment
 from experiments.scientific.catalog import SCIENTIFIC_EXPERIMENTS
 from experiments.scientific.s001_public_metadata_association import run as run_s001
 from experiments.scientific.s002_public_metadata_association import run as run_s002
+from experiments.scientific.s003_compatibility_validation import run as run_s003
+from experiments.scientific.s004_temporal_shadow import run as run_s004
+from oncodex.agent_boots import BOOT_CONTRACTS, BootTarget, build_boot_agent
 from oncodex.config import Settings
+from store.jsonl import AppendOnlyJsonlStore
 
 RUNNERS = {
     "A001": run_a001,
@@ -68,8 +73,11 @@ RUNNERS = {
     "A025": run_a025,
     "A026": run_a026,
     "A027": run_a027,
+    "A028": run_a028,
     "S001": run_s001,
     "S002": run_s002,
+    "S003": run_s003,
+    "S004": run_s004,
 }
 
 ALL_EXPERIMENTS = EXPERIMENTS + SCIENTIFIC_EXPERIMENTS
@@ -85,6 +93,9 @@ def _parser() -> argparse.ArgumentParser:
     run = sub.add_parser("run")
     run.add_argument("experiment_id", choices=tuple(RUNNERS))
     run.add_argument("--live", action="store_true")
+    boot = sub.add_parser("boot")
+    boot.add_argument("target", choices=[target.value for target in BootTarget])
+    boot.add_argument("--prompt", default="")
     return parser
 
 
@@ -96,7 +107,7 @@ def _status(settings: Settings) -> int:
     print(f"agent_provider: {'openrouter' if settings.openrouter_api_key else 'openai/default'}")
     print(f"jev_model: {settings.jev_model or '(not configured)'}")
     print(f"typesafe_configured: {bool(settings.typesafe_api_key)}")
-    print("implemented experiments: A001-A027 and S001-S002")
+    print("implemented experiments: A001-A028 and S001-S004")
     print("scientific claims: none")
     return 0
 
@@ -105,6 +116,56 @@ def _list_experiments() -> int:
     for spec in ALL_EXPERIMENTS:
         marker = "implemented" if spec.experiment_id in RUNNERS else "catalog"
         print(f"{spec.experiment_id} [{spec.experiment_class.value}] {marker}: {spec.question}")
+    return 0
+
+
+def _boot(settings: Settings, target: BootTarget, prompt: str) -> int:
+    from oncodex.model_provider import build_agent_model
+    from oncodex.research_loop import ResearchRuntime
+    from oncodex.sandbox import SandboxJournal, create_sandbox
+    from oncolab.capabilities import CapabilityRegistry
+    from oncolab.gaps import GapLedger
+    from oncolab.operations import OperationRegistry
+    from research.ledger import EvidenceLedger, InvestigationLedger
+
+    store = AppendOnlyJsonlStore(settings.store_dir / "boot" / f"{target.value}.jsonl")
+    runtime = ResearchRuntime(
+        registry=CapabilityRegistry(),
+        operations=OperationRegistry(),
+        executors={},
+        gaps=GapLedger(store),
+        investigations=InvestigationLedger(store),
+        evidence=EvidenceLedger(store),
+    )
+    sandbox = create_sandbox(
+        settings.store_dir / "boot" / target.value / "workspace",
+        sandbox_id=f"boot-{target.value}",
+    )
+    journal = SandboxJournal(store=store, sandbox_id=sandbox.sandbox_id)
+    try:
+        model = build_agent_model(settings)
+    except Exception:  # noqa: BLE001 - boot stays offline-capable
+        model = None
+    agent = build_boot_agent(
+        target,
+        runtime=runtime,
+        sandbox=sandbox,
+        journal=journal,
+        model=model,
+    )
+    payload: dict[str, object] = {
+        "target": target.value,
+        "contract": list(BOOT_CONTRACTS[target]),
+        "tools": sorted(str(getattr(tool, "name", "")) for tool in agent.tools),
+    }
+    if prompt:
+        try:
+            from oncodex.abc_runtimes import run_arm_live
+
+            payload["final_output"] = run_arm_live(agent=agent, prompt=prompt)["final_output"]
+        except Exception as exc:  # noqa: BLE001 - live failure is reported
+            payload["live_error"] = f"{type(exc).__name__}: {exc}"
+    print(json.dumps(payload, indent=2, default=str))
     return 0
 
 
@@ -118,6 +179,8 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "plan":
         print(json.dumps(asdict(get_experiment(args.experiment_id)), indent=2, default=str))
         return 0
+    if args.command == "boot":
+        return _boot(settings, BootTarget(args.target), str(args.prompt))
     runner = RUNNERS[args.experiment_id]
     result = runner(settings=settings, live=bool(args.live))
     if asyncio.iscoroutine(result):

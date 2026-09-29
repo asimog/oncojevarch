@@ -65,7 +65,7 @@ Scientific experiments do not silently redesign OnCodex.
 
 Executable architecture experiments:
 
-- A001-A027 and scientific S001-S002 — all executable; architecture outcomes live in
+- A001-A028 and scientific S001-S004 — all executable; architecture outcomes live in
   `docs/EXPERIMENT_CATALOG.md`, scientific outcomes in `experiments/scientific/catalog.py`.
 
 ## Verification

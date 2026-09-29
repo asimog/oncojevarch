@@ -25,7 +25,8 @@ class ReasoningOutput:
 class ReasoningResult:
     """Structured reasoning plus the resource account for one bounded call.
 
-    OncoX produces interpretation and proposed investigation, never measurement.
+    OncoX produces interpretation and proposed investigation, never measurement. ``raw_output``
+    preserves the complete model response (whole structured payload, not only parsed fields).
     """
 
     output: ReasoningOutput
@@ -34,6 +35,7 @@ class ReasoningResult:
     latency_ms: float = 0.0
     attempts: int = 1
     errors: tuple[str, ...] = ()
+    raw_output: str = ""
 
 
 class ScientificReasoner(Protocol):

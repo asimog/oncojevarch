@@ -105,6 +105,7 @@ def test_arm_a_is_deterministic_only(tmp_path: Path) -> None:
         "oncox_calls": 0,
         "max_jev_calls": 0,
         "max_oncox_calls": 0,
+        "enforced": False,
     }
 
 
@@ -128,15 +129,24 @@ def test_arm_c_adds_judgment_and_interpretation(tmp_path: Path) -> None:
     assert answer["primitive"] == JevPrimitive.NOUL.value
     assert float(answer["value"]) == 0.2
     assert record.jev_record["policy"] == "defer"
+    assert record.jev_record["raw"] == {"test_double": True}
     assert record.budget["jev_calls"] == 1
 
 
-def test_budget_blocks_undeclared_calls(tmp_path: Path) -> None:
+def test_budget_accounting_records_by_default_and_blocks_when_enforced(tmp_path: Path) -> None:
+    record = _run_arm(
+        tmp_path / "unforced",
+        RuntimeArm.C_PLUS_JEV_PLUS_ONCOX,
+        budget=CallBudget(max_jev_calls=0, max_oncox_calls=0),
+    )
+    assert record.budget["jev_calls"] == 1
+    assert record.budget["enforced"] is False
+
     with pytest.raises(BudgetExceeded):
         _run_arm(
-            tmp_path,
+            tmp_path / "enforced",
             RuntimeArm.C_PLUS_JEV_PLUS_ONCOX,
-            budget=CallBudget(max_jev_calls=0, max_oncox_calls=1),
+            budget=CallBudget(max_jev_calls=0, max_oncox_calls=0, enforce=True),
         )
 
 
