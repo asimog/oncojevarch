@@ -277,13 +277,20 @@ EXPERIMENTS: tuple[ExperimentSpec, ...] = (
     _a(
         14,
         "Do offline discovered semantic features generalize to locked cases?",
-        "Development-selected features improve a downstream metric on untouched cases.",
+        "Selected semantic features preserve locked-test performance without split leakage.",
         ("development split", "validation split", "locked test split"),
         ("offline feature discovery", "Jev feature evaluator", "downstream model"),
         ("baseline features", "frozen discovered features"),
         ("locked-test performance", "calibration", "feature stability", "cost"),
         ("no locked-test gain or evidence of split leakage",),
         ("promote evaluated features only or discard them",),
+        executable=True,
+        success=(
+            "discovery and threshold fitting never see the locked split",
+            "the text of every split passes the label-token leakage audit",
+            "locked-test performance is reported against a frozen baseline feature set",
+            "only Jev-endorsed features are promoted, and promotion is scoped to this corpus",
+        ),
     ),
     _a(
         15,
